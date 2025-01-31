@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Products | Thrash & Treasure</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Custom Buyer CSS -->
+    <link rel="stylesheet" href="../../../assets/css/buyer.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="g-sidenav-show bg-gray-100">
+    <!-- Sidebar -->
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-xl my-3 fixed-start ms-3">
+        <div class="sidenav-header">
+            <a class="navbar-brand m-0" href="buyer-dashboard.html">
+                <img src="../../../assets/images/logo.svg" alt="Thrash & Treasure Logo" class="navbar-brand-img h-100" style="max-height: 50px;">
+                <span class="ms-2 font-weight-bold">Thrash & Treasure</span>
+            </a>
+        </div>
+        <hr class="horizontal dark mt-0">
+        <div class="w-auto h-auto" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="buyer-dashboard.html" style="margin-left: 20px;">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-th opacity-10" style="color: #344767;"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="browse-products.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-store opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Browse Products</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-shopping-cart opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Shopping Cart</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="wishlist.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-heart opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Wishlist</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="order-tracking.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-truck opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Order Tracking</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="feedback.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-star opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Feedback</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="report-issues.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-exclamation-circle opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Report Issue</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps-4 pe-4">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0">
+                        <li class="breadcrumb-item text-sm active" aria-current="page">Browse Products</li>
+                    </ol>
+                    <h6 class="font-weight-bolder mb-0" style="font-size: 20px;">Browse Products</h6>
+                </nav>
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                        <div class="input-group">
+                            <span class="input-group-text text-body"><i class="bi bi-search"></i></span>
+                            <input type="text" class="form-control" placeholder="Search products...">
+                        </div>
+                    </div>
+                    <li class="nav-item dropdown">
+                        <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                            <i class="bi bi-bell cursor-pointer fs-4"></i>
+                            <span class="badge badge-sm bg-danger notification-badge">3</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <p class="text-sm mb-0">You have 3 notifications</p>
+                                <button class="btn btn-link text-primary text-sm mb-0">Mark all read</button>
+                            </div>
+                            <!-- Notification Item 1 -->
+                            <a class="dropdown-item border-radius-md" href="javascript:;">
+                                <div class="d-flex py-1">
+                                    <div class="my-auto">
+                                        <i class="bi bi-truck me-3 text-info"></i>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="text-sm font-weight-normal mb-1">
+                                            Order #ORD-2024-002 has been shipped
+                                        </h6>
+                                        <p class="text-xs text-secondary mb-0">
+                                            <i class="bi bi-clock me-1"></i>
+                                            2 hours ago
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- Notification Item 2 -->
+                            <a class="dropdown-item border-radius-md" href="javascript:;">
+                                <div class="d-flex py-1">
+                                    <div class="my-auto">
+                                        <i class="bi bi-tag me-3 text-success"></i>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="text-sm font-weight-normal mb-1">
+                                            New discount available on vintage items
+                                        </h6>
+                                        <p class="text-xs text-secondary mb-0">
+                                            <i class="bi bi-clock me-1"></i>
+                                            1 day ago
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- Notification Item 3 -->
+                            <a class="dropdown-item border-radius-md" href="javascript:;">
+                                <div class="d-flex py-1">
+                                    <div class="my-auto">
+                                        <i class="bi bi-chat-dots me-3 text-warning"></i>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="text-sm font-weight-normal mb-1">
+                                            Seller responded to your message
+                                        </h6>
+                                        <p class="text-xs text-secondary mb-0">
+                                            <i class="bi bi-clock me-1"></i>
+                                            2 days ago
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                        <!-- Profile -->
+                        <li class="nav-item dropdown">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="profileDropdown" data-bs-toggle="dropdown">
+                                <img src="../../../assets/images/john.jpg" class="avatar avatar-sm" alt="avatar">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Products Content -->
+        <div class="container-fluid py-4">
+            <!-- Filters -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <form>
+                                <div class="row align-items-center">
+                                    <div class="col-lg-8 mb-3 mb-lg-0">
+                                        <div class="input-group input-group-lg">
+                                            <span class="input-group-text bg-white border-end-0">
+                                                <i class="bi bi-search"></i>
+                                            </span>
+                                            <input type="text" class="form-control border-start-0 ps-0" 
+                                                   placeholder="Search for vintage items, antiques, collectibles...">
+                                            <button class="btn btn-primary" type="submit">Search</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="d-flex gap-2">
+                                            <select class="form-select">
+                                                <option value="">All Categories</option>
+                                                <option>Vintage Electronics</option>
+                                                <option>Antique Furniture</option>
+                                                <option>Collectibles</option>
+                                                <option>Art</option>
+                                            </select>
+                                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" 
+                                                    data-bs-target="#advancedSearch">
+                                                <i class="bi bi-sliders2"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="collapse mt-3" id="advancedSearch">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Price Range</label>
+                                            <div class="d-flex gap-2">
+                                                <input type="number" class="form-control" placeholder="Min">
+                                                <input type="number" class="form-control" placeholder="Max">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Condition</label>
+                                            <select class="form-select">
+                                                <option value="">Any Condition</option>
+                                                <option>Like New</option>
+                                                <option>Excellent</option>
+                                                <option>Good</option>
+                                                <option>Fair</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Era</label>
+                                            <select class="form-select">
+                                                <option value="">Any Era</option>
+                                                <option>Pre-1900s</option>
+                                                <option>1900s-1950s</option>
+                                                <option>1950s-1980s</option>
+                                                <option>1980s-2000s</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="row">
+                <!-- Product Card 1 -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card product-card">
+                        <div class="position-relative">
+                            <img src="../../../assets/images/products/vintage-camera.jpg" class="card-img-top" alt="Vintage Camera">
+                            <button class="btn btn-icon-favorite">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                            <div class="product-overlay">
+                                <a href="product-details.html" class="btn btn-light btn-sm">View Details</a>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="card-title h6 mb-0">M3 Camera</h5>
+                                <p class="price-tag mb-0">MYR 90</p>
+                            </div>
+                            <p class="text-muted small mb-2">1960s Film Camera</p>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <div class="rating text-warning me-2">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                    </div>
+                                    <small class="text-muted">(28)</small>
+                                </div>
+                                <button class="btn btn-primary btn-sm d-flex align-items-center" style="width: auto; padding: 0.5rem 0.75rem;">
+                                    <i class="bi bi-cart-plus" style="font-size: 1.25rem;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more product cards here -->
+                <!-- Product Card 2 -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card product-card">
+                        <div class="position-relative">
+                            <img src="../../../assets/images/products/typewriter.jpg" class="card-img-top" alt="Vintage Typewriter">
+                            <button class="btn btn-icon-favorite">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                            <div class="product-overlay">
+                                <a href="product-details.html" class="btn btn-light btn-sm">View Details</a>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="card-title h6 mb-0">Vintage Typewriter</h5>
+                                <p class="price-tag mb-0">MYR 50</p>
+                            </div>
+                            <p class="text-muted small mb-2">Classic Remington Model</p>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <div class="rating text-warning me-2">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star"></i>
+                                    </div>
+                                    <small class="text-muted">(18)</small>
+                                </div>
+                                <button class="btn btn-primary btn-sm d-flex align-items-center" style="width: auto; padding: 0.5rem 0.75rem;">
+                                    <i class="bi bi-cart-plus" style="font-size: 1.25rem;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card product-card">
+                        <div class="position-relative">
+                            <img src="../../../assets/images/products/vinyl-player.jpg" class="card-img-top" alt="Vinyl Record Player">
+                            <button class="btn btn-icon-favorite">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                            <div class="product-overlay">
+                                <a href="product-details.html" class="btn btn-light btn-sm">View Details</a>
+                            </div>
+                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">Sale!</span>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="card-title h6 mb-0">Vinyl Record Player</h5>
+                                <div class="text-end">
+                                    <p class="text-xs text-decoration-line-through mb-0">MYR 100</p>
+                                    <p class="text-sm font-weight-bold text-danger mb-0">MYR 30</p>
+                                </div>
+                            </div>
+                            <p class="text-muted small mb-2">Restored Turntable</p>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <div class="rating text-warning me-2">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <small class="text-muted">(32)</small>
+                                </div>
+                                <button class="btn btn-primary btn-sm d-flex align-items-center" style="width: auto; padding: 0.5rem 0.75rem;">
+                                    <i class="bi bi-cart-plus" style="font-size: 1.25rem;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card product-card">
+                        <div class="position-relative">
+                            <img src="../../../assets/images/products/antique-clock.jpg" class="card-img-top" alt="Antique Wall Clock">
+                            <button class="btn btn-icon-favorite">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                            <div class="product-overlay">
+                                <a href="product-details.html" class="btn btn-light btn-sm">View Details</a>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="card-title h6 mb-0">Antique Wall Clock</h5>
+                                <p class="price-tag mb-0">MYR 88</p>
+                            </div>
+                            <p class="text-muted small mb-2">Victorian Era Timepiece</p>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <div class="rating text-warning me-2">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                    </div>
+                                    <small class="text-muted">(21)</small>
+                                </div>
+                                <button class="btn btn-primary btn-sm d-flex align-items-center" style="width: auto; padding: 0.5rem 0.75rem;">
+                                    <i class="bi bi-cart-plus" style="font-size: 1.25rem;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 5 -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card product-card">
+                        <div class="position-relative">
+                            <img src="../../../assets/images/products/vintage-radio.jpg" class="card-img-top" alt="Vintage Radio">
+                            <button class="btn btn-icon-favorite">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                            <div class="product-overlay">
+                                <a href="product-details.html" class="btn btn-light btn-sm">View Details</a>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="card-title h6 mb-0">Radio</h5>
+                                <p class="price-tag mb-0">MYR 20</p>
+                            </div>
+                            <p class="text-muted small mb-2">1960s Transistor Radio</p>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <div class="rating text-warning me-2">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-half"></i>
+                                    </div>
+                                    <small class="text-muted">(24)</small>
+                                </div>
+                                <button class="btn btn-primary btn-sm d-flex align-items-center" style="width: auto; padding: 0.5rem 0.75rem;">
+                                    <i class="bi bi-cart-plus" style="font-size: 1.25rem;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 6 -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card product-card">
+                        <div class="position-relative">
+                            <img src="../../../assets/images/products/vintage-lamp.jpg" class="card-img-top" alt="Art Deco Lamp">
+                            <button class="btn btn-icon-favorite">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                            <div class="product-overlay">
+                                <a href="product-details.html" class="btn btn-light btn-sm">View Details</a>
+                            </div>
+                            <span class="badge bg-danger position-absolute top-0 start-0 m-2">Sale!</span>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="card-title h6 mb-0">Lamp</h5>
+                                <div class="text-end">
+                                    <p class="text-xs text-decoration-line-through mb-0">MYR 90</p>
+                                    <p class="text-sm font-weight-bold text-danger mb-0">MYR 55</p>
+                                </div>
+                            </div>
+                            <p class="text-muted small mb-2">1930s Table Lamp</p>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <div class="rating text-warning me-2">
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star"></i>
+                                    </div>
+                                    <small class="text-muted">(16)</small>
+                                </div>
+                                <button class="btn btn-primary btn-sm d-flex align-items-center" style="width: auto; padding: 0.5rem 0.75rem;">
+                                    <i class="bi bi-cart-plus" style="font-size: 1.25rem;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Add this toast element right before the closing </body> tag -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="addToCartToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle me-2"></i>
+                    Item successfully added to cart!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this script right before the closing </body> tag, after the Bootstrap JS -->
+    <script>
+        // Get all cart buttons (both text and icon buttons)
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            button.addEventListener('click', function() {
+                const toast = new bootstrap.Toast(document.getElementById('addToCartToast'));
+                toast.show();
+            });
+        });
+    </script>
+</body>
+</html> 

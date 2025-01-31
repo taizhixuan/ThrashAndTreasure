@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Deliveries | Thrash & Treasure</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Custom Logistics CSS -->
+    <link rel="stylesheet" href="../../../assets/css/logistics.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #deliveryMap {
+            height: 500px;
+            border-radius: 0.5rem;
+        }
+        .delivery-card {
+            transition: all 0.2s ease;
+        }
+        .delivery-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 1rem;
+            border-left: 1px solid #dee2e6;
+            padding-left: 20px;
+        }
+        
+        .timeline-item i {
+            position: absolute;
+            left: -6px;
+            background: white;
+        }
+        
+        .timeline-item:last-child {
+            border-left: none;
+        }
+    </style>
+</head>
+<body class="g-sidenav-show bg-gray-100">
+    <!-- Sidebar -->
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-xl my-3 fixed-start ms-3">
+        <div class="sidenav-header">
+            <a class="navbar-brand m-0 ps-3" href="logistics-dashboard.html">
+                <img src="../../../assets/images/logo.svg" alt="Thrash & Treasure Logo" class="navbar-brand-img h-100" style="max-height: 50px;">
+                <span class="ms-2 font-weight-bold">Thrash & Treasure</span>
+            </a>
+        </div>
+        <hr class="horizontal dark mt-0">
+        <div class="w-auto h-auto" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item mb-2">
+                    <a class="nav-link ps-4" href="logistics-dashboard.html">
+                        <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link ps-4" href="assign-tasks.html">
+                        <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-list-task"></i>
+                        </div>
+                                <span class="nav-link-text ms-1">Assign Tasks</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link active ps-4" href="track-deliveries.html">
+                        <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-truck"></i>
+                        </div>
+                        <span class="nav-link-text ms-1 ">Track Deliveries</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link ps-4" href="resolve-delivery-issues.html">
+                        <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Resolve Issues</span>
+                    </a>    
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link ps-4" href="logistics-messages.html">
+                        <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-chat-dots"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Messages</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps-4 pe-4">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0">
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="logistics-dashboard.html">Logistics</a></li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Track Deliveries</li>
+                    </ol>
+                    <h6 class="font-weight-bolder mb-0">Track Deliveries</h6>
+                </nav>
+                
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                    <!-- Search Bar -->
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                        <div class="input-group">
+                            <span class="input-group-text text-body"><i class="bi bi-search"></i></span>
+                            <input type="text" class="form-control" placeholder="   Search...">
+                        </div>
+                    </div>
+                    
+                    <!-- Right Navigation Items -->
+                    <ul class="navbar-nav justify-content-end">
+                        <!-- Notifications -->
+                        <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                                <i class="bi bi-bell cursor-pointer"></i>
+                                <span class="position-absolute badge rounded-pill bg-danger">
+                                    3
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                                        <div class="d-flex py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">New delivery task assigned</h6>
+                                                <p class="text-xs text-secondary mb-0">5 mins ago</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                                        <div class="d-flex py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">Delivery delayed alert</h6>
+                                                <p class="text-xs text-secondary mb-0">15 mins ago</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                                        <div class="d-flex py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">New issue reported</h6>
+                                                <p class="text-xs text-secondary mb-0">30 mins ago</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Profile -->
+                        <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="profileDropdown" data-bs-toggle="dropdown">
+                                <img src="../../../assets/images/profile.svg" class="avatar avatar-sm" alt="avatar">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Deliveries Content -->
+        <div class="container-fluid py-4">
+            <!-- Map and Filters -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6>Live Delivery Tracking</h6>
+                                <div class="d-flex align-items-center">
+                                    <select class="form-select form-select-sm me-2" id="statusFilter">
+                                        <option value="">All Statuses</option>
+                                        <option value="on-way">On the Way</option>
+                                        <option value="delivered">Delivered</option>
+                                        <option value="delayed">Delayed</option>
+                                    </select>
+                                    <select class="form-select form-select-sm" id="courierFilter">
+                                        <option value="">All Couriers</option>
+                                        <option value="1">John Smith</option>
+                                        <option value="2">Sarah Johnson</option>
+                                        <option value="3">Mike Wilson</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="deliveryMap"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Deliveries -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6>Active Deliveries</h6>
+                                <div class="input-group w-25">
+                                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                                    <input type="text" class="form-control" placeholder="Search deliveries...">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Delivery ID</th>
+                                            <th>Courier</th>
+                                            <th>Status</th>
+                                            <th>ETA</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="delivery-row" data-delivery-id="1">
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-dark font-weight-bold">#DEL-2024-001</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="../../../assets/images/john.jpg" class="avatar avatar-sm rounded-circle me-2" style="max-height: 100px;">
+                                                    <div>
+                                                        <span class="text-dark font-weight-bold">John Smith</span>
+                                                        <p class="text-xs text-secondary mb-0">ID: #C001</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="badge bg-success me-2">On the Way</span>
+                                                    <i class="bi bi-truck"></i>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="text-dark">15:30</span>
+                                                <p class="text-xs text-secondary mb-0">On Schedule</p>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-link text-dark px-3 mb-0" data-bs-toggle="modal" data-bs-target="#deliveryDetailsModal" data-delivery-id="1">
+                                                    <i class="bi bi-eye-fill me-2"></i>View
+                                                </button>
+                                                <button class="btn btn-link text-primary px-3 mb-0" onclick="trackDelivery(1)">
+                                                    <i class="bi bi-geo-alt-fill me-2"></i>Track
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="delivery-row" data-delivery-id="2">
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="text-dark font-weight-bold">#DEL-2024-002</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="../../../assets/images/sarah.jpg" class="avatar avatar-sm rounded-circle me-2" style="max-height: 100px;">
+                                                    <div>
+                                                        <span class="text-dark font-weight-bold">Sarah Johnson</span>
+                                                        <p class="text-xs text-secondary mb-0">ID: #C002</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <span class="badge bg-warning me-2">Delayed</span>
+                                                    <i class="bi bi-clock-history"></i>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="text-dark">16:45</span>
+                                                <p class="text-xs text-danger mb-0">Delayed by 15min</p>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-link text-dark px-3 mb-0" data-bs-toggle="modal" data-bs-target="#deliveryDetailsModal" data-delivery-id="2">
+                                                    <i class="bi bi-eye-fill me-2"></i>View
+                                                </button>
+                                                <button class="btn btn-link text-primary px-3 mb-0" onclick="trackDelivery(2)">
+                                                    <i class="bi bi-geo-alt-fill me-2"></i>Track
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Delivery Details Modal -->
+    <div class="modal fade" id="deliveryDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delivery Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-sm">Delivery Information</h6>
+                            <div class="delivery-info">
+                                <p><strong>Order ID:</strong> <span id="modalOrderId">#ORD-2024-001</span></p>
+                                <p><strong>Customer:</strong> <span id="modalCustomer">Alice Brown</span></p>
+                                <p><strong>Delivery Address:</strong> <span id="modalAddress">123 Main St, City</span></p>
+                                <p><strong>Contact:</strong> <span id="modalContact">+1 234-567-8900</span></p>
+                            </div>
+                            <h6 class="text-sm mt-4">Delivery Progress</h6>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <i class="bi bi-circle-fill text-success"></i>
+                                    <span class="text-dark">Order Picked Up</span>
+                                    <small class="text-secondary">14:30</small>
+                                </div>
+                                <div class="timeline-item">
+                                    <i class="bi bi-circle-fill text-primary"></i>
+                                    <span class="text-dark">In Transit</span>
+                                    <small class="text-secondary">15:15</small>
+                                </div>
+                                <div class="timeline-item">
+                                    <i class="bi bi-circle text-secondary"></i>
+                                    <span class="text-secondary">Delivered</span>
+                                    <small class="text-secondary">Expected 15:45</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-sm">Delivery Route</h6>
+                            <div id="modalMap" style="height: 200px;"></div>
+                            <div class="mt-3">
+                                <button class="btn btn-sm btn-outline-primary" onclick="sendNotification()">
+                                    <i class="bi bi-bell me-2"></i>Send Notification
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="reportIssue()">
+                                    <i class="bi bi-exclamation-triangle me-2"></i>Report Issue
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Initialize map
+            const map = L.map('deliveryMap').setView([51.505, -0.09], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+            // Add sample delivery markers
+            const deliveries = [
+                { id: 1, lat: 51.505, lng: -0.09, status: 'on-way' },
+                { id: 2, lat: 51.51, lng: -0.1, status: 'delayed' },
+                { id: 3, lat: 51.515, lng: -0.095, status: 'delivered' }
+            ];
+
+            deliveries.forEach(delivery => {
+                const marker = L.marker([delivery.lat, delivery.lng])
+                    .bindPopup(`Delivery #${delivery.id}<br>Status: ${delivery.status}`)
+                    .addTo(map);
+            });
+
+            // Filter functionality
+            $('#statusFilter, #courierFilter').change(function() {
+                // Handle filter logic
+            });
+
+            // Search functionality
+            $('.input-group input[type="text"]').on('keyup', function() {
+                const searchText = $(this).val().toLowerCase();
+                $('tbody tr').each(function() {
+                    const rowText = $(this).text().toLowerCase();
+                    $(this).toggle(rowText.indexOf(searchText) > -1);
+                });
+            });
+        });
+
+        // Enhanced map markers with custom icons
+        const deliveryIcons = {
+            'on-way': L.icon({
+                iconUrl: '../../../assets/images/icons/delivery-truck.png',
+                iconSize: [32, 32]
+            }),
+            'delayed': L.icon({
+                iconUrl: '../../../assets/images/icons/delayed.png',
+                iconSize: [32, 32]
+            }),
+            'delivered': L.icon({
+                iconUrl: '../../../assets/images/icons/delivered.png',
+                iconSize: [32, 32]
+            })
+        };
+
+        // Sample delivery data
+        const deliveryData = {
+            1: {
+                orderId: '#ORD-2024-001',
+                customer: 'Alice Brown',
+                address: '123 Main St, City',
+                contact: '+1 234-567-8900',
+                status: 'on-way',
+                eta: '15:30',
+                route: [
+                    [51.505, -0.09],
+                    [51.51, -0.085],
+                    [51.515, -0.08]
+                ]
+            },
+            2: {
+                orderId: '#ORD-2024-002',
+                customer: 'Bob Wilson',
+                address: '456 Oak Ave, Town',
+                contact: '+1 234-567-8901',
+                status: 'delayed',
+                eta: '16:45',
+                route: [
+                    [51.51, -0.1],
+                    [51.515, -0.095],
+                    [51.52, -0.09]
+                ]
+            }
+        };
+
+        // Track specific delivery
+        function trackDelivery(deliveryId) {
+            const delivery = deliveryData[deliveryId];
+            map.setView(delivery.route[0], 14);
+            // Draw route line
+            L.polyline(delivery.route, {color: 'blue', weight: 3}).addTo(map);
+        }
+
+        // Initialize modal map
+        let modalMap;
+        $('#deliveryDetailsModal').on('shown.bs.modal', function(e) {
+            const deliveryId = $(e.relatedTarget).data('delivery-id');
+            const delivery = deliveryData[deliveryId];
+            
+            // Update modal content
+            $('#modalOrderId').text(delivery.orderId);
+            $('#modalCustomer').text(delivery.customer);
+            $('#modalAddress').text(delivery.address);
+            $('#modalContact').text(delivery.contact);
+
+            // Initialize modal map if not already initialized
+            if (!modalMap) {
+                modalMap = L.map('modalMap').setView(delivery.route[0], 14);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(modalMap);
+            }
+            
+            // Clear previous layers and add new route
+            modalMap.eachLayer((layer) => {
+                if (layer instanceof L.Polyline || layer instanceof L.Marker) {
+                    modalMap.removeLayer(layer);
+                }
+            });
+            L.polyline(delivery.route, {color: 'blue', weight: 3}).addTo(modalMap);
+            L.marker(delivery.route[0], {icon: deliveryIcons[delivery.status]}).addTo(modalMap);
+        });
+
+        // Notification function
+        function sendNotification() {
+            // Implement notification logic
+            alert('Notification sent to customer');
+        }
+
+        // Report issue function
+        function reportIssue() {
+            // Implement issue reporting logic
+            window.location.href = 'resolve-delivery-issues.html';
+        }
+    </script>
+</body>
+</html> 

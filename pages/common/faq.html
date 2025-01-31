@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | Thrash and Treasure Platform</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/css/styles.css" rel="stylesheet">
+</head>
+<body>
+            <!-- Header -->
+            <header class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+                <div class="container">
+                    <a class="navbar-brand" href="../common/index.html">
+                        <img src="../../assets/images/logo.svg" alt="Thrash and Treasure Platform" height="60" class="d-inline-block align-text-top">
+                        <span class="ms-2 fw-bold text-primary fs-4">Thrash and Treasure</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/layouts/base.html">Home</a> 
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="about.html">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="faq.html">FAQ</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex">
+                            <a href="../pages/common/login.html" class="btn btn-outline-primary me-2">Login</a>
+                            <a href="../pages/common/register.html" class="btn btn-primary">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+    
+    <main class="container my-5 pt-5">
+        <h1 class="text-center mb-5">Frequently Asked Questions</h1>
+
+        <!-- FAQ Categories -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="btn-group w-100" role="group">
+                    <button type="button" class="btn btn-outline-primary" data-category="account">Account Management</button>
+                    <button type="button" class="btn btn-outline-primary" data-category="buying">Buying</button>
+                    <button type="button" class="btn btn-outline-primary" data-category="selling">Selling</button>
+                    <button type="button" class="btn btn-outline-primary" data-category="security">Security</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Sections -->
+        <div class="accordion" id="faqAccordion">
+            <!-- Account Management -->
+            <div class="category-section" data-category="account">
+                <h2 class="h4 mb-3">Account Management</h2>
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#account1">
+                            How do I create an account?
+                        </button>
+                    </h3>
+                    <div id="account1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Click the "Register" button in the top right corner and fill out the registration form. You'll need to provide:
+                            <ul>
+                                <li>Full Name</li>
+                                <li>Email Address</li>
+                                <li>Password</li>
+                                <li>Role (Buyer or Seller)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#account2">
+                            How do I reset my password?
+                        </button>
+                    </h3>
+                    <div id="account2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Click "Forgot Password?" on the login page and follow the instructions sent to your email.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buying -->
+            <div class="category-section mt-4" data-category="buying">
+                <h2 class="h4 mb-3">Buying</h2>
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#buying1">
+                            How do I purchase an item?
+                        </button>
+                    </h3>
+                    <div id="buying1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Browse items, click on one you're interested in, and use the "Add to Cart" button. Follow the checkout process to complete your purchase.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#buying2">
+                            What payment methods are accepted?
+                        </button>
+                    </h3>
+                    <div id="buying2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            We accept credit cards, PayPal, and bank transfers. All transactions are secure and encrypted.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Selling -->
+            <div class="category-section mt-4" data-category="selling">
+                <h2 class="h4 mb-3">Selling</h2>
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#selling1">
+                            How do I list an item for sale?
+                        </button>
+                    </h3>
+                    <div id="selling1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Log in as a seller, go to your dashboard, and click "Add New Item". Fill in the item details, upload photos, and set your price.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#selling2">
+                            What are the seller fees?
+                        </button>
+                    </h3>
+                    <div id="selling2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            We charge a small commission of 5% on successful sales. There are no listing fees.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security -->
+            <div class="category-section mt-4" data-category="security">
+                <h2 class="h4 mb-3">Security</h2>
+                
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#security1">
+                            How is my personal information protected?
+                        </button>
+                    </h3>
+                    <div id="security1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            We use industry-standard encryption and security measures to protect your data. Read our Privacy Policy for more details.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#security2">
+                            What should I do if I suspect fraudulent activity?
+                        </button>
+                    </h3>
+                    <div id="security2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Contact our support team immediately through the Contact page. We take security concerns seriously.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Support -->
+        <div class="text-center mt-5">
+            <p class="mb-3">Can't find what you're looking for?</p>
+            <a href="/contact" class="btn btn-primary">Contact Support</a>
+        </div>
+    </main>
+
+    <!-- Include Footer from base.html -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Category filter functionality
+        document.querySelectorAll('[data-category]').forEach(button => {
+            button.addEventListener('click', function() {
+                const category = this.dataset.category;
+                
+                // Toggle active state of buttons
+                document.querySelectorAll('[data-category]').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Show/hide relevant sections
+                document.querySelectorAll('.category-section').forEach(section => {
+                    if (category === 'all' || section.dataset.category === category) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

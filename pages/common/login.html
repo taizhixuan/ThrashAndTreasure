@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Thrash and Treasure Platform</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../assets/css/styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Include Header from base.html -->
+    
+    <main class="container my-5 pt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow-lg">
+                    <div class="card-body p-4">
+                        <div class="text-center mb-4">
+                            <img src="../../assets/images/logo.svg" alt="Trash and Treasure Platform" height="100" class="mb-4">
+                            <span class="d-block mb-2" style="font-family: 'Poppins', sans-serif; color: #2ecc71; font-size: 1.75rem; font-weight: 600;">Trash and Treasure</span>
+                            <h1 class="h3 fw-bold">Welcome Back</h1>
+                            <p class="text-muted">Login to access your account</p>
+                        </div>
+
+                        <!-- Login Form -->
+                        <form id="loginForm" action="/api/auth/login" method="POST">
+                            <!-- Email Input -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-envelope"></i>
+                                    </span>
+                                    <input 
+                                        type="email" 
+                                        class="form-control" 
+                                        id="email" 
+                                        name="email" 
+                                        required 
+                                        autocomplete="email"
+                                        placeholder="Enter your email">
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please enter a valid email address.
+                                </div>
+                            </div>
+
+                            <!-- Password Input -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-lock"></i>
+                                    </span>
+                                    <input 
+                                        type="password" 
+                                        class="form-control" 
+                                        id="password" 
+                                        name="password" 
+                                        required 
+                                        minlength="8"
+                                        placeholder="Enter your password">
+                                    <button 
+                                        class="btn btn-outline-secondary" 
+                                        type="button" 
+                                        id="togglePassword">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Password must be at least 8 characters long.
+                                </div>
+                            </div>
+
+                            <!-- Remember Me & Forgot Password -->
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
+                                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                                </div>
+                                <a href="/password-reset" class="text-primary text-decoration-none">Forgot Password?</a>
+                            </div>
+
+                            <!-- Login Button -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="spinner-border spinner-border-sm d-none me-2" role="status"></span>
+                                    Login
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Register Link -->
+                        <div class="text-center mt-4">
+                            <p class="mb-0">Don't have an account? 
+                                <a href="register.html" class="text-primary text-decoration-none">Register</a>
+                            </p>
+                        </div>
+
+                        <!-- Error Alert (Hidden by default) -->
+                        <div class="alert alert-danger mt-3 d-none" id="errorAlert" role="alert">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            <span id="errorMessage"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include Footer from base.html -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const errorAlert = document.getElementById('errorAlert');
+            const errorMessage = document.getElementById('errorMessage');
+            const spinner = document.querySelector('.spinner-border');
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+
+            // Toggle password visibility
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.querySelector('i').classList.toggle('bi-eye');
+                this.querySelector('i').classList.toggle('bi-eye-slash');
+            });
+
+            // Form submission
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                try {
+                    // Show spinner
+                    spinner.classList.remove('d-none');
+                    
+                    const response = await fetch('http://localhost:3000/api/auth/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({
+                            email: loginForm.email.value,
+                            password: loginForm.password.value,
+                            rememberMe: loginForm.rememberMe.checked
+                        })
+                    });
+
+                    const data = await response.json();
+                    console.log('Login response:', data); // Debug response
+
+                    if (response.ok) {
+                        // Store token and user data
+                        const storage = loginForm.rememberMe.checked ? localStorage : sessionStorage;
+                        storage.setItem('authToken', data.token);
+                        storage.setItem('userData', JSON.stringify(data.user));
+
+                        // Debug redirect information
+                        console.log('User role:', data.user.role);
+                        console.log('Original redirect URL:', data.redirectUrl);
+
+                        // Ensure the redirectUrl starts with a forward slash
+                        const redirectUrl = data.redirectUrl.startsWith('/') ? data.redirectUrl : '/' + data.redirectUrl;
+                        console.log('Final redirect URL:', redirectUrl);
+
+                        // Add a small delay to ensure storage is complete
+                        setTimeout(() => {
+                            window.location.href = redirectUrl;
+                        }, 100);
+                    } else {
+                        throw new Error(data.message || 'Login failed');
+                    }
+                } catch (error) {
+                    console.error('Login error:', error);
+                    errorMessage.textContent = error.message || 'Failed to connect to the server. Please try again.';
+                    errorAlert.classList.remove('d-none');
+                } finally {
+                    spinner.classList.add('d-none');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

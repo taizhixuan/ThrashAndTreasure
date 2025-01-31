@@ -1,0 +1,42 @@
+/* This would normally be the minified version of Material Dashboard Pro CSS */
+/* For now, we'll include some basic styles */
+
+.g-sidenav-show {
+    padding-left: 250px;
+}
+
+.sidenav {
+    width: 250px;
+    background: #fff;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .15);
+    z-index: 1050;
+}
+
+.main-content {
+    margin-left: 250px;
+}
+
+.card {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border-radius: 0.75rem;
+    background-color: #fff;
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(195deg, #EC407A 0%, #D81B60 100%);
+}
+
+.bg-gradient-success {
+    background: linear-gradient(195deg, #66BB6A 0%, #43A047 100%);
+}
+
+.icon-shape {
+    width: 48px;
+    height: 48px;
+    background-position: center;
+    border-radius: 0.75rem;
+} 

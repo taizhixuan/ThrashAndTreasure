@@ -1,0 +1,178 @@
+/* Base sidenav styles - matching buyer.css exactly */
+.g-sidenav-show {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.sidenav {
+    z-index: 1040;
+    background: #ffffff;
+    box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .25);
+    width: 250px;
+    height: calc(100vh - 2rem);
+    margin: 1rem;
+    border-radius: 0.75rem;
+    position: fixed;
+    border: 2px solid #e9ecef !important;
+    overflow-y: auto;
+    padding-bottom: 1rem;
+}
+
+/* Navigation styles */
+.sidenav .navbar-nav {
+    padding: 0.5rem;
+    width: 100%;
+    align-items: flex-start;
+    padding-bottom: 2rem;
+}
+
+.sidenav .nav-link {
+    color: #000000;
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+/* Icon styles */
+.sidenav .icon-shape {
+    width: 36px;
+    height: 36px;
+    background-color: #000000;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem !important;
+    padding: 0.5rem;
+    box-shadow: 0 -2px 6px rgba(52, 71, 103, 0.1), 
+                0 2px 4px rgba(52, 71, 103, 0.1);
+}
+
+.sidenav .icon-shape i {
+    color: #ffffff;
+    opacity: 1;
+    font-size: 1rem;
+}
+
+/* Active and hover states */
+.sidenav .nav-link:hover,
+.sidenav .nav-link.active {
+    background: #d0d7df;
+    border-radius: 0.25rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.sidenav .nav-link.active .icon-shape {
+    background-color: #000000 !important;
+    transform: translateX(5px);
+}
+
+/* Main content adjustment */
+.main-content {
+    margin-left: 270px;
+    padding: 1rem;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .sidenav {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .g-sidenav-show .sidenav {
+        transform: translateX(0);
+    }
+}
+
+/* Add these styles for notification spacing */
+.navbar-nav .nav-item.dropdown {
+    margin-right: 1rem;  /* Add space between dropdown items */
+    padding: 0.5rem;     /* Add padding around the icons */
+}
+
+/* Style the notification icon and badge */
+.nav-link .bi-bell {
+    font-size: 1.25rem;
+    position: relative;
+    padding: 0.5rem;
+}
+
+/* Adjust badge position */
+.position-absolute.badge {
+    top: 0 !important;
+    right: -5px !important;
+    padding: 0.35em 0.55em;
+    font-size: 0.75rem;
+}
+
+/* Profile dropdown spacing */
+.nav-item:last-child {
+    margin-right: 0;  /* Remove margin from last item */
+}
+
+/* Avatar sizing and spacing */
+.avatar.avatar-sm {
+    width: 36px;
+    height: 36px;
+    margin-left: 0.5rem;
+}
+
+/* Remove the collapse class from the navbar-collapse div */
+.sidenav .navbar-collapse {
+    width: 100%;
+    height: auto;
+}
+
+/* Add spacing for the last nav item */
+.sidenav .nav-item:last-child {
+    margin-bottom: 2rem;
+}
+
+/* Remove any inline margins from nav links */
+.sidenav .nav-link[style*="margin-left"] {
+    margin-left: 0 !important;
+}
+
+/* Stats card icon styles */
+.icon-shape.bg-gradient-primary,
+.icon-shape.bg-gradient-success,
+.icon-shape.bg-gradient-info,
+.icon-shape.bg-gradient-warning {
+    background-color: #000000 !important;
+    background-image: none !important;
+    box-shadow: 0 3px 6px rgba(52, 71, 103, 0.15);
+    width: 48px;                    /* Increased width */
+    height: 48px;                   /* Increased height */
+    border-radius: 12px !important; /* More rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0;
+}
+
+/* Icon color and opacity */
+.icon-shape i {
+    color: #ffffff !important;
+    opacity: 1 !important;
+    font-size: 1.5rem !important;   /* Slightly larger icons */
+}
+
+/* Hover effect for stat icons */
+.icon-shape:hover {
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
+    box-shadow: 0 5px 10px rgba(52, 71, 103, 0.2);
+}
+
+/* Override any border-radius classes */
+.border-radius-md {
+    border-radius: 12px !important;
+} 

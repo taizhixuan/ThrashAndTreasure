@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resolve Disputes | Admin Dashboard</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Custom Admin CSS -->
+    <link rel="stylesheet" href="../../../assets/css/admin.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="g-sidenav-show bg-gray-100">
+    <!-- Sidebar -->
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3">
+        <div class="sidenav-header">
+            <a class="navbar-brand m-0" href="admin-dashboard.html">
+                <img src="../../../assets/images/logo.svg" alt="Thrash & Treasure Logo" class="navbar-brand-img h-100" style="max-height: 50px;">
+                <span class="ms-2 font-weight-bold">Thrash & Treasure</span>
+            </a>
+        </div>
+        <hr class="horizontal dark mt-0">
+        <div class="w-auto h-auto" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="admin-dashboard.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-th-large opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="manage-users.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-users opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Manage Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="approve-seller-listings.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-card-checklist"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Approve Listings</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="monitor-performance.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Performance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="resolve-disputes.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Resolve Disputes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="manage-notifications.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-bell-fill"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Notifications</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="generate-reports.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-file-earmark-text-fill"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="manage-delivery-zones.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Delivery Zones</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin-messages.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-chat-dots-fill"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Messages</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps-5 pe-4">
+        <!-- Header -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="admin-dashboard.html">Admin</a></li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Resolve Disputes</li>
+                    </ol>
+                    <h6 class="font-weight-bolder mb-0">Dispute Resolution</h6>
+                </nav>
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                        <div class="input-group input-group-outline">
+                            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" placeholder="Type here...">
+                        </div>
+                    </div>
+                    <ul class="navbar-nav justify-content-end">
+                        <li class="nav-item dropdown pe-2 d-flex align-items-center notification-wrapper">
+                            <a href="javascript:;" class="nav-link text-body p-2 position-relative" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-bell-fill cursor-pointer"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    5
+                                    <span class="visually-hidden">unread notifications</span>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                                        <div class="d-flex py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">New dispute reported</h6>
+                                                <p class="text-xs text-secondary mb-0">2 mins ago</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item border-radius-md text-center text-primary" href="manage-notifications.html">
+                                        View All
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Container for the rest of the content -->
+        <div class="container-fluid py-4">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2 class="mb-0">Dispute Resolution</h2>
+                    <p class="text-sm mb-0">Manage and resolve user disputes and conflicts</p>
+                </div>
+            </div>
+
+            <!-- Disputes Table -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header pb-0">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Active Disputes</h6>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search disputes...">
+                                        <button class="btn btn-outline-primary" type="button">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-4"></div>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Dispute ID</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Order ID</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Buyer Name</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Seller Name</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Dispute Reason</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>#D12345</td>
+                                            <td>#O98765</td>
+                                            <td>John Doe</td>
+                                            <td>Jane Smith</td>
+                                            <td>Item not as described</td>
+                                            <td class="text-center"><span class="badge bg-gradient-warning">In Progress</span></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewDisputeModal">View</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#D12346</td>
+                                            <td>#O98766</td>
+                                            <td>Alice Johnson</td>
+                                            <td>Bob Brown</td>
+                                            <td>Wrong item received</td>
+                                            <td class="text-center"><span class="badge bg-gradient-danger">Pending</span></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewDisputeModal">View</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#D12347</td>
+                                            <td>#O98767</td>
+                                            <td>Charlie Davis</td>
+                                            <td>David Wilson</td>
+                                            <td>Item arrived damaged</td>
+                                            <td class="text-center"><span class="badge bg-gradient-warning">In Progress</span></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewDisputeModal">View</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#D12348</td>
+                                            <td>#O98768</td>
+                                            <td>Emily Clark</td>
+                                            <td>Frank Harris</td>
+                                            <td>Late delivery</td>
+                                            <td class="text-center"><span class="badge bg-gradient-success">Resolved</span></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewDisputeModal">View</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#D12349</td>
+                                            <td>#O98769</td>
+                                            <td>George Martin</td>
+                                            <td>Helen White</td>
+                                            <td>Request for refund</td>
+                                            <td class="text-center"><span class="badge bg-gradient-danger">Pending</span></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewDisputeModal">View</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#D12350</td>
+                                            <td>#O98770</td>
+                                            <td>Irene Black</td>
+                                            <td>Jack Green</td>
+                                            <td>Product not delivered</td>
+                                            <td class="text-center"><span class="badge bg-gradient-warning">In Progress</span></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewDisputeModal">View</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#D12351</td>
+                                            <td>#O98771</td>
+                                            <td>Kevin Brown</td>
+                                            <td>Laura Blue</td>
+                                            <td>Refund processed</td>
+                                            <td class="text-center"><span class="badge bg-gradient-success">Resolved</span></td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewDisputeModal">View</button>
+                                            </td>
+                                        </tr>
+                                        <!-- More dispute entries -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-4"></div>
+
+            <!-- Pagination -->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </main>
+
+    <!-- Dispute Details Modal -->
+    <div class="modal fade" id="viewDisputeModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Dispute Details #D12345</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h6 class="text-sm">Buyer Information</h6>
+                            <p class="text-sm mb-1">Name: John Doe</p>
+                            <p class="text-sm mb-1">Email: john@example.com</p>
+                            <p class="text-sm mb-1">Phone: +1 234-567-8900</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-sm">Seller Information</h6>
+                            <p class="text-sm mb-1">Name: Jane Smith</p>
+                            <p class="text-sm mb-1">Email: jane@example.com</p>
+                            <p class="text-sm mb-1">Phone: +1 234-567-8901</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <h6 class="text-sm">Order Details</h6>
+                        <p class="text-sm mb-1">Order ID: #O98765</p>
+                        <p class="text-sm mb-1">Item: Vintage Chair</p>
+                        <p class="text-sm mb-1">Price: $199.99</p>
+                        <p class="text-sm mb-1">Order Date: Jan 15, 2024</p>
+                    </div>
+                    <div class="mb-4">
+                        <h6 class="text-sm">Dispute Information</h6>
+                        <p class="text-sm mb-1">Issue Type: Item not as described</p>
+                        <p class="text-sm mb-1">Filed Date: Jan 20, 2024</p>
+                        <p class="text-sm mb-3">Status: In Progress</p>
+                        <p class="text-sm mb-1"><strong>Buyer's Statement:</strong></p>
+                        <p class="text-sm mb-3">The item received was not as described in the listing.</p>
+                    </div>
+                    <!-- Communication Section -->
+                    <div class="mb-4">
+                        <h6 class="text-sm">Communication</h6>
+                        <div class="chat-box">
+                            <div class="message">
+                                <p class="text-sm mb-0"><strong>Admin:</strong> Please provide more details about the issue.</p>
+                                <small class="text-muted">Jan 21, 2024, 10:00 AM</small>
+                            </div>
+                            <!-- More messages -->
+                        </div>
+                        <div class="input-group mt-3">
+                            <input type="text" class="form-control" placeholder="Type a message...">
+                            <button class="btn btn-primary" type="button">Send</button>
+                        </div>
+                    </div>
+                    <!-- Resolution Options -->
+                    <div class="mb-4">
+                        <h6 class="text-sm">Resolution Options</h6>
+                        <button class="btn btn-success me-2" onclick="confirmResolution('refund')">Issue Refund</button>
+                        <button class="btn btn-warning me-2" onclick="confirmResolution('replacement')">Send Replacement</button>
+                        <button class="btn btn-danger" onclick="confirmResolution('dismiss')">Dismiss Dispute</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core JS Files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function confirmResolution(action) {
+            let message = '';
+            switch(action) {
+                case 'refund':
+                    message = 'Are you sure you want to issue a refund?';
+                    break;
+                case 'replacement':
+                    message = 'Are you sure you want to send a replacement?';
+                    break;
+                case 'dismiss':
+                    message = 'Are you sure you want to dismiss this dispute?';
+                    break;
+            }
+            if (confirm(message)) {
+                // Handle resolution action
+                alert('Resolution action completed successfully!');
+                $('#viewDisputeModal').modal('hide');
+            }
+        }
+    </script>
+
+    <!-- Add this style section before the closing body tag -->
+    <style>
+        /* Fix notification dropdown positioning */
+        .notification-wrapper .dropdown-menu {
+            position: absolute !important;
+            top: 100% !important;
+            right: 0 !important;
+            left: auto !important;
+            width: 320px;
+            margin-top: 0.5rem !important;
+            transform: none !important;
+            z-index: 9999 !important;
+            box-shadow: 0 8px 26px -4px rgba(20, 20, 20, 0.15);
+        }
+
+        /* Ensure search bar doesn't get overlapped */
+        .input-group-outline {
+            margin-right: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Ensure navbar stays above table but below dropdown */
+        .navbar-main {
+            position: relative;
+            z-index: 1000;
+        }
+
+        /* Fix notification badge positioning */
+        .notification-wrapper .badge {
+            transform: translate(50%, -50%) !important;
+            z-index: 2;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .notification-wrapper .dropdown-menu {
+                position: fixed !important;
+                top: 60px !important;
+                right: 1rem !important;
+                left: auto !important;
+                width: calc(100% - 2rem);
+                max-width: 320px;
+                margin: 0.5rem 0 !important;
+            }
+        }
+    </style>
+</body>
+</html> 

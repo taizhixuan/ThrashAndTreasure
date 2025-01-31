@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Orders | Thrash & Treasure</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Custom Seller CSS -->
+    <link rel="stylesheet" href="../../../assets/css/seller.css">
+    <style>
+        /* Status column styling */
+        .status-column {
+            color: #344767 !important; /* Dark gray/black color */
+            font-size: 0.875rem !important; /* Increased from text-xs (0.75rem) */
+            font-weight: 600 !important;
+        }
+
+        /* For better visibility of status badges */
+        .badge {
+            color: #344767 !important; /* Dark text color */
+            font-size: 0.875rem !important;
+            padding: 0.5em 0.75em !important;
+            background-color: #ffffff !important; /* White background */
+            border: 1px solid #e9ecef !important; /* Light border */
+        }
+
+        /* Status-specific colors */
+        .badge.bg-success {
+            border-color: #2dce89 !important;
+        }
+
+        .badge.bg-warning {
+            border-color: #fb6340 !important;
+        }
+
+        .badge.bg-danger {
+            border-color: #f5365c !important;
+        }
+    </style>
+</head>
+<body class="g-sidenav-show bg-gray-100">
+    <!-- Sidebar -->
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-xl my-3 fixed-start ms-3">
+        <div class="sidenav-header">
+            <a class="navbar-brand m-0 ps-3" href="seller-dashboard.html">
+                <img src="../../../assets/images/logo.svg" alt="Thrash & Treasure Logo" class="navbar-brand-img h-100" style="max-height: 50px;">
+                <span class="ms-2 font-weight-bold">Thrash & Treasure</span>
+            </a>
+        </div>
+        <hr class="horizontal dark mt-0">
+        <div class="w-auto h-auto" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item mb-2">
+                    <a class="nav-link  ps-4" href="seller-dashboard.html">
+                        <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-grid-1x2-fill"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link ps-4" href="manage-products.html">
+                        <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-box-seam"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Manage Products</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link active ps-4" href="process-orders.html">
+                        <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-cart-check"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Process Orders</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link ps-4" href="inventory-management.html">
+                        <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-clipboard-data"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Inventory</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link ps-4" href="seller-messages.html">
+                        <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-chat-dots"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Messages</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link ps-4" href="view-reviews.html">
+                        <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-star"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Reviews</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link ps-4" href="add-promotion.html">
+                        <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-tag"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Promotions</span>
+                    </a>
+                </li>
+                <li class="nav-item mb-2">
+                    <a class="nav-link ps-4" href="manage-returns.html">
+                        <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-arrow-return-left"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Returns</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+
+    <!-- Main content -->
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps-4 pe-4">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0">
+                        <li class="breadcrumb-item text-sm"><a href="seller-dashboard.html">Seller</a></li>
+                        <li class="breadcrumb-item text-sm active" aria-current="page">Process Orders</li>
+                    </ol>
+                    <h6 class="font-weight-bolder mb-0">Process Orders</h6>
+                </nav>
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                    <!-- Search Bar -->
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                        <div class="input-group">
+                            <span class="input-group-text text-body"><i class="bi bi-search"></i></span>
+                            <input type="text" class="form-control" placeholder="Search...">
+                        </div>
+                    </div>
+                    
+                    <!-- Right Navigation Items -->
+                    <ul class="navbar-nav justify-content-end">
+                        <!-- Notifications -->
+                        <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                                <i class="bi bi-bell cursor-pointer"></i>
+                                <span class="position-absolute badge rounded-pill bg-danger">
+                                    3
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4">
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                                        <div class="d-flex py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">New order received</h6>
+                                                <p class="text-xs text-secondary mb-0">2 mins ago</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <!-- Add more notification items -->
+                            </ul>
+                        </li>
+
+                        <!-- Profile -->
+                        <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                                <img src="../../../assets/images/profile.svg" class="avatar avatar-sm" alt="avatar">
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Orders Content -->
+        <div class="container-fluid py-4">
+            <!-- Order Filters -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-3">
+                                    <select class="form-select">
+                                        <option value="">All Orders</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="processing">Processing</option>
+                                        <option value="shipped">Shipped</option>
+                                        <option value="delivered">Delivered</option>
+                                        <option value="cancelled">Cancelled</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="date" class="form-control" placeholder="Date From">
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="date" class="form-control" placeholder="Date To">
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search orders...">
+                                        <button class="btn btn-outline-primary" type="button">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Orders List</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID/Date</th>
+                                            <th>Customer</th>
+                                            <th>Products</th>
+                                            <th>Total</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Order 1 -->
+                                        <tr>
+                                            <td class="ps-4">
+                                                <p class="text-xs font-weight-bold mb-0">#ORD-2024-001</p>
+                                                <p class="text-xs text-secondary mb-0">March 15, 2024</p>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">John Smith</h6>
+                                                        <p class="text-xs text-secondary mb-0">john@example.com</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">Vintage Camera</p>
+                                                <p class="text-xs text-secondary mb-0">Qty: 1</p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">RM299.99</p>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-sm bg-gradient-info">Processing</span>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-link text-primary px-3 mb-0" onclick="viewOrderDetails({
+                                                    order_id: '#ORD-2024-001',
+                                                    customer_name: 'John Smith',
+                                                    customer_email: 'john@example.com',
+                                                    shipping_address: '123 Main St, Anytown, ST 12345',
+                                                    order_date: '2024-03-15',
+                                                    status: 'Processing',
+                                                    total_amount: '299.99',
+                                                    items: [{
+                                                        product_name: 'Vintage Camera',
+                                                        quantity: 1,
+                                                        unit_price: '299.99',
+                                                        subtotal: '299.99'
+                                                    }]
+                                                })">
+                                                    <i class="bi bi-eye me-2"></i>View
+                                                </button>
+                                                <!-- <button class="btn btn-link text-success px-3 mb-0">
+                                                    <i class="bi bi-check-circle me-2"></i>Ship
+                                                </button> -->
+                                            </td>
+                                        </tr>
+
+                                        <!-- Order 2 -->
+                                        <tr>
+                                            <td class="ps-4">
+                                                <p class="text-xs font-weight-bold mb-0">#ORD-2024-002</p>
+                                                <p class="text-xs text-secondary mb-0">March 14, 2024</p>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">Emma Wilson</h6>
+                                                        <p class="text-xs text-secondary mb-0">emma@example.com</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">Antique Wooden Chair</p>
+                                                <p class="text-xs text-secondary mb-0">Qty: 2</p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">RM399.98</p>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-sm bg-gradient-success">Shipped</span>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-link text-primary px-3 mb-0" onclick="viewOrderDetails({
+                                                    order_id: '#ORD-2024-002',
+                                                    customer_name: 'Emma Wilson',
+                                                    customer_email: 'emma@example.com',
+                                                    shipping_address: '456 Oak Ave, Springfield, ST 67890',
+                                                    order_date: '2024-03-14',
+                                                    status: 'Shipped',
+                                                    total_amount: '399.98',
+                                                    items: [{
+                                                        product_name: 'Antique Wooden Chair',
+                                                        quantity: 2,
+                                                        unit_price: '199.99',
+                                                        subtotal: '399.98'
+                                                    }]
+                                                })">
+                                                    <i class="bi bi-eye me-2"></i>View
+                                                </button>
+                                                <!-- <button class="btn btn-link text-info px-3 mb-0">
+                                                    <i class="bi bi-truck me-2"></i>Track
+                                                </button> -->
+                                            </td>
+                                        </tr>
+
+                                        <!-- Order 3 -->
+                                        <tr>
+                                            <td class="ps-4">
+                                                <p class="text-xs font-weight-bold mb-0">#ORD-2024-003</p>
+                                                <p class="text-xs text-secondary mb-0">March 14, 2024</p>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">Michael Brown</h6>
+                                                        <p class="text-xs text-secondary mb-0">michael@example.com</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">Vintage Vinyl Records Collection</p>
+                                                <p class="text-xs text-secondary mb-0">Qty: 3</p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">RM449.97</p>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-sm bg-gradient-warning">Pending</span>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-link text-primary px-3 mb-0" onclick="viewOrderDetails({
+                                                    order_id: '#ORD-2024-003',
+                                                    customer_name: 'Michael Brown',
+                                                    customer_email: 'michael@example.com',
+                                                    shipping_address: '789 Pine St, Riverside, ST 13579',
+                                                    order_date: '2024-03-14',
+                                                    status: 'Pending',
+                                                    total_amount: '449.97',
+                                                    items: [{
+                                                        product_name: 'Vintage Vinyl Records Collection',
+                                                        quantity: 3,
+                                                        unit_price: '149.99',
+                                                        subtotal: '449.97'
+                                                    }]
+                                                })">
+                                                    <i class="bi bi-eye me-2"></i>View
+                                                </button>
+                                                <!-- <button class="btn btn-link text-success px-3 mb-0">
+                                                    <i class="bi bi-check-circle me-2"></i>Process
+                                                </button> -->
+                                            </td>
+                                        </tr>
+
+                                        <!-- Order 4 -->
+                                        <tr>
+                                            <td class="ps-4">
+                                                <p class="text-xs font-weight-bold mb-0">#ORD-2024-004</p>
+                                                <p class="text-xs text-secondary mb-0">March 13, 2024</p>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">Sarah Davis</h6>
+                                                        <p class="text-xs text-secondary mb-0">sarah@example.com</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">Retro Radio Set</p>
+                                                <p class="text-xs text-secondary mb-0">Qty: 1</p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">RM89.99</p>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-sm bg-gradient-danger">Cancelled</span>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-link text-primary px-3 mb-0" onclick="viewOrderDetails({
+                                                    order_id: '#ORD-2024-004',
+                                                    customer_name: 'Sarah Davis',
+                                                    customer_email: 'sarah@example.com',
+                                                    shipping_address: '321 Elm St, Lakeside, ST 24680',
+                                                    order_date: '2024-03-13',
+                                                    status: 'Cancelled',
+                                                    total_amount: '89.99',
+                                                    items: [{
+                                                        product_name: 'Retro Radio Set',
+                                                        quantity: 1,
+                                                        unit_price: '89.99',
+                                                        subtotal: '89.99'
+                                                    }]
+                                                })">
+                                                    <i class="bi bi-eye me-2"></i>View
+                                                </button>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Order 5 -->
+                                        <tr>
+                                            <td class="ps-4">
+                                                <p class="text-xs font-weight-bold mb-0">#ORD-2024-005</p>
+                                                <p class="text-xs text-secondary mb-0">March 13, 2024</p>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-sm">David Wilson</h6>
+                                                        <p class="text-xs text-secondary mb-0">david@example.com</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">Vintage Pocket Watch</p>
+                                                <p class="text-xs text-secondary mb-0">Qty: 1</p>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">RM249.99</p>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-sm bg-gradient-success">Delivered</span>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-link text-primary px-3 mb-0" onclick="viewOrderDetails({
+                                                    order_id: '#ORD-2024-005',
+                                                    customer_name: 'David Wilson',
+                                                    customer_email: 'david@example.com',
+                                                    shipping_address: '654 Maple Dr, Hilltown, ST 97531',
+                                                    order_date: '2024-03-13',
+                                                    status: 'Delivered',
+                                                    total_amount: '249.99',
+                                                    items: [{
+                                                        product_name: 'Vintage Pocket Watch',
+                                                        quantity: 1,
+                                                        unit_price: '249.99',
+                                                        subtotal: '249.99'
+                                                    }]
+                                                })">
+                                                    <i class="bi bi-eye me-2"></i>View
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Order Details Modal -->
+    <div class="modal fade" id="orderDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Order Details #ORD-2024-001</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Order details content -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Temporarily disabled orders fetching
+        /*
+        async function fetchOrders() {
+            try {
+                console.log('Fetching orders...'); // Debug log
+                const response = await fetch('/api/seller/orders', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                console.log('Response status:', response.status);
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.message}`);
+                }
+
+                const orders = await response.json();
+                console.log('Fetched orders:', orders);
+                // ... rest of the function
+            } catch (error) {
+                console.error('Error fetching orders:', error);
+                document.querySelector('tbody').innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center text-danger">
+                            Error loading orders: ${error.message}
+                        </td>
+                    </tr>`;
+            }
+        }
+        */
+
+        // Comment out the DOMContentLoaded event listener
+        /*
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchOrders();
+        });
+        */
+
+        // Add these helper functions
+        function formatOrderItems(order) {
+            if (!order.products) return 'No items';
+            const products = order.products.split(',');
+            const quantities = order.quantities.split(',');
+            const prices = order.prices.split(',');
+            
+            return products.map((product, i) => 
+                `${product} (${quantities[i]} × RM${prices[i]})`
+            ).join('<br>');
+        }
+
+        function getStatusColor(status) {
+            switch (status.toLowerCase()) {
+                case 'pending':
+                    return 'warning';
+                case 'processing':
+                    return 'info';
+                case 'shipped':
+                    return 'primary';
+                case 'delivered':
+                    return 'success';
+                case 'cancelled':
+                    return 'danger';
+                default:
+                    return 'secondary';
+            }
+        }
+
+        function viewOrderDetails(orderData) {
+            const modal = document.getElementById('orderDetailsModal');
+            const modalBody = modal.querySelector('.modal-body');
+            const modalTitle = modal.querySelector('.modal-title');
+
+            modalTitle.textContent = `Order Details ${orderData.order_id}`;
+            modalBody.innerHTML = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Customer Information</h6>
+                        <p>Name: ${orderData.customer_name}</p>
+                        <p>Email: ${orderData.customer_email}</p>
+                        <p>Shipping Address: ${orderData.shipping_address}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Order Information</h6>
+                        <p>Date: ${new Date(orderData.order_date).toLocaleDateString()}</p>
+                        <p>Status: <span class="badge bg-${getStatusColor(orderData.status)}">${orderData.status}</span></p>
+                        <p>Total: RM${orderData.total_amount}</p>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <h6>Order Items</h6>
+                        <div class="table-responsive">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${orderData.items.map(item => `
+                                        <tr>
+                                            <td>${item.product_name}</td>
+                                            <td>${item.quantity}</td>
+                                            <td>RM${item.unit_price}</td>
+                                            <td>RM${item.subtotal}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const modalInstance = new bootstrap.Modal(modal);
+            modalInstance.show();
+        }
+
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+            document.querySelector('.container-fluid').prepend(alertDiv);
+        }
+
+        // Add event listeners for filters
+        document.addEventListener('DOMContentLoaded', () => {
+            // Status filter
+            document.querySelector('select').addEventListener('change', (e) => {
+                // Add filter logic here
+                console.log('Status filter:', e.target.value);
+            });
+
+            // Search input
+            const searchInput = document.querySelector('input[placeholder="Search orders..."]');
+            searchInput.addEventListener('keyup', (e) => {
+                // Add search logic here
+                console.log('Search term:', e.target.value);
+            });
+        });
+
+        async function updateOrderStatus(orderId, newStatus) {
+            try {
+                const response = await fetch(`/api/seller/orders/${orderId}/status`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status: newStatus })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                // Refresh the orders list
+                await fetchOrders();
+                showAlert('Order status updated successfully', 'success');
+            } catch (error) {
+                console.error('Error updating order status:', error);
+                showAlert('Error updating order status: ' + error.message, 'danger');
+            }
+        }
+    </script>
+</body>
+</html> 

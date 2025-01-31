@@ -1,0 +1,137 @@
+/* Custom styles for admin dashboard */
+
+/* Sidebar styles */
+.sidenav .navbar-brand {
+    padding: 1rem;
+}
+
+.sidenav .nav-link {
+    color: #344767;
+    padding: 0.75rem 1rem;
+    margin: 0.1rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.sidenav .nav-link:hover,
+.sidenav .nav-link.active {
+    background-color: #f8f9fa;
+    color: #344767;
+}
+
+.sidenav .nav-link i {
+    color: #344767;
+}
+
+/* Card styles */
+.card {
+    margin-bottom: 24px;
+}
+
+.card-header {
+    padding: 1.5rem;
+    background: transparent;
+    border-bottom: 0;
+}
+
+/* Table styles */
+.table > :not(caption) > * > * {
+    padding: 1rem 1rem;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Button styles */
+.btn-primary {
+    background-color: #344767;
+    border-color: #344767;
+}
+
+.btn-primary:hover {
+    background-color: #293956;
+    border-color: #293956;
+}
+
+/* Modal styles */
+.modal-content {
+    border-radius: 0.75rem;
+    border: none;
+}
+
+.modal-header {
+    border-bottom: none;
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    border-top: none;
+    padding: 1.5rem;
+}
+
+/* Form styles */
+.form-control {
+    border-radius: 0.5rem;
+}
+
+.form-label {
+    color: #344767;
+    font-weight: 600;
+}
+
+/* Chart card styles */
+.chart-canvas {
+    height: 300px !important;
+}
+
+/* Statistics card styles */
+.numbers {
+    font-weight: 600;
+}
+
+.numbers .text-sm {
+    font-size: 0.875rem;
+    color: #67748e;
+}
+
+.numbers h5 {
+    font-size: 1.25rem;
+    line-height: 1.375;
+}
+
+.numbers .text-success {
+    display: block;
+    font-size: 0.875rem;
+    color: #4CAF50;
+}
+
+/* Icon styles */
+.icon-shape {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-shape i {
+    color: #fff;
+    font-size: 1.25rem;
+}
+
+/* Chart container */
+.chart {
+    position: relative;
+    height: 300px;
+}
+
+/* Time indicators */
+.text-sm {
+    font-size: 0.875rem;
+    color: #67748e;
+}
+
+.bi-clock {
+    color: #67748e;
+} 

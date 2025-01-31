@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approve Listings | Admin Dashboard</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+    <!-- Include Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Custom Admin CSS -->
+    <link rel="stylesheet" href="../../../assets/css/admin.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Add this in the head section, after the other CSS links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="g-sidenav-show bg-gray-100">
+    <!-- Sidebar -->
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3">
+        <div class="sidenav-header">
+            <a class="navbar-brand m-0" href="admin-dashboard.html">
+                <img src="../../../assets/images/logo.svg" alt="Thrash & Treasure Logo" class="navbar-brand-img h-100" style="max-height: 50px;">
+                <span class="ms-2 font-weight-bold">Thrash & Treasure</span>
+            </a>
+        </div>
+        <hr class="horizontal dark mt-0">
+        <div class="w-auto h-auto" id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="admin-dashboard.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-th-large opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="manage-users.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-users opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Manage Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="approve-seller-listings.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-card-checklist"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Approve Listings</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="monitor-performance.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Performance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="resolve-disputes.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Resolve Disputes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="manage-notifications.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-bell-fill"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Notifications</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="generate-reports.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-file-earmark-text-fill"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Reports</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="manage-delivery-zones.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Delivery Zones</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="admin-messages.html">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="bi bi-chat-dots-fill"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Messages</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps-4 pe-4">
+        <!-- Header -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="admin-dashboard.html">Admin</a></li>
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Approve Listings</li>
+                    </ol>
+                    <h6 class="font-weight-bolder mb-0">Approve Listings</h6>
+                </nav>
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                        <div class="input-group input-group-outline">
+                            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" placeholder="Type here...">
+                        </div>
+                    </div>
+                    <ul class="navbar-nav justify-content-end">
+                        <li class="nav-item dropdown pe-2 d-flex align-items-center notification-wrapper">
+                            <a href="javascript:;" class="nav-link text-body p-2 position-relative" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-bell-fill cursor-pointer"></i>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    5
+                                    <span class="visually-hidden">unread notifications</span>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="javascript:;" onclick="showListingDetails('12345')">
+                                        <div class="d-flex py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">New listing awaiting approval</h6>
+                                                <p class="text-xs text-secondary mb-0">Vintage Chair - 2 mins ago</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="javascript:;" onclick="showListingDetails('12346')">
+                                        <div class="d-flex py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">Updated listing needs review</h6>
+                                                <p class="text-xs text-secondary mb-0">Antique Table - 1 hour ago</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item border-radius-md text-center text-primary" href="manage-notifications.html">
+                                        View All
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid py-4">
+            <!-- Add spacing before the table -->
+            <div class="mb-4"></div>
+
+            <!-- Listings Table -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header pb-0">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Pending Listings</h6>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search listings...">
+                                        <button class="btn btn-outline-primary" type="button">
+                                            <i class="bi bi-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Add spacing after search -->
+                            <div class="mb-4"></div>
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                            <div class="table-responsive p-0">
+                                <table class="table align-items-center mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Image</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product Name</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Seller</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Date</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listingsTableBody">
+                                        <!-- Data will be dynamically loaded here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add spacing after the table -->
+            <div class="mb-4"></div>
+
+            <!-- Pagination -->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </main>
+
+    <!-- View Listing Modal -->
+    <div class="modal fade" id="viewListingModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Listing Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="../../../assets/images/vintage.jpeg"  class="img-fluid rounded">
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Vintage Chair</h5>
+                            <p class="text-sm text-secondary">ID: #12345</p>
+                            <p class="text-sm mb-2"><strong>Price:</strong> $199.99</p>
+                            <p class="text-sm mb-2"><strong>Category:</strong> Furniture</p>
+                            <p class="text-sm mb-2"><strong>Condition:</strong> Good</p>
+                            <p class="text-sm mb-2"><strong>Description:</strong></p>
+                            <p class="text-sm">Vintage wooden chair in excellent condition. Minor wear consistent with age.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" onclick="approveListing('12345')">Approve</button>
+                    <button type="button" class="btn btn-danger" onclick="rejectListing('12345')">Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div class="modal fade" id="feedbackModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Feedback for Rejection</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <textarea class="form-control" rows="4" placeholder="Enter feedback for rejection..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Submit Feedback</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core JS Files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        async function fetchListings() {
+            try {
+                console.log('Starting fetchListings...');
+                const response = await fetch('/api/admin/pending-listings', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                console.log('Response received:', {
+                    status: response.status,
+                    statusText: response.statusText
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const listings = await response.json();
+                console.log('Listings received:', listings);
+
+                const tableBody = document.getElementById('listingsTableBody');
+                if (!tableBody) {
+                    console.error('Table body element not found!');
+                    return;
+                }
+
+                if (listings.length === 0) {
+                    tableBody.innerHTML = `
+                        <tr>
+                            <td colspan="7" class="text-center">
+                                No pending listings found
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                tableBody.innerHTML = listings.map(listing => `
+                    <tr>
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div>
+                                    <img src="${listing.product_image || ''}" class="avatar avatar-sm me-3" alt="${listing.product_name}">
+                                </div>
+                            </div>
+                        </td>
+                        <td>${listing.product_name || ''}</td>
+                        <td>${listing.seller_name || ''}</td>
+                        <td>${listing.category || ''}</td>
+                        <td>${listing.submission_date ? new Date(listing.submission_date).toLocaleDateString() : ''}</td>
+                        <td>
+                            <span class="badge badge-sm bg-gradient-warning">${listing.status || ''}</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-link text-primary px-3 mb-0" onclick="approveListing(${listing.id})">
+                                <i class="fas fa-check me-2"></i>Approve
+                            </button>
+                            <button class="btn btn-link text-danger px-3 mb-0" onclick="rejectListing(${listing.id})">
+                                <i class="fas fa-times me-2"></i>Reject
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Error in fetchListings:', error);
+                const tableBody = document.getElementById('listingsTableBody');
+                if (tableBody) {
+                    tableBody.innerHTML = `
+                        <tr>
+                            <td colspan="7" class="text-center text-danger">
+                                <p>Error loading listings: ${error.message}</p>
+                                <small class="text-muted">Please check the browser console for more details.</small>
+                            </td>
+                        </tr>
+                    `;
+                }
+            }
+        }
+
+        async function approveListing(id) {
+            try {
+                const response = await fetch(`/api/admin/approve-listing/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+                }
+
+                // Show success message
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-success alert-dismissible fade show';
+                alertDiv.innerHTML = `
+                    Listing approved successfully!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                `;
+                document.querySelector('.container-fluid').prepend(alertDiv);
+
+                // Refresh the listings
+                await fetchListings();
+            } catch (error) {
+                console.error('Error approving listing:', error);
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-danger alert-dismissible fade show';
+                alertDiv.innerHTML = `
+                    Error approving listing: ${error.message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                `;
+                document.querySelector('.container-fluid').prepend(alertDiv);
+            }
+        }
+
+        async function rejectListing(id) {
+            try {
+                const response = await fetch(`/api/admin/reject-listing/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+                }
+
+                // Show success message
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-success alert-dismissible fade show';
+                alertDiv.innerHTML = `
+                    Listing rejected successfully!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                `;
+                document.querySelector('.container-fluid').prepend(alertDiv);
+
+                // Refresh the listings
+                await fetchListings();
+            } catch (error) {
+                console.error('Error rejecting listing:', error);
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-danger alert-dismissible fade show';
+                alertDiv.innerHTML = `
+                    Error rejecting listing: ${error.message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                `;
+                document.querySelector('.container-fluid').prepend(alertDiv);
+            }
+        }
+
+        // Auto-remove alerts after 5 seconds
+        document.addEventListener('DOMContentLoaded', () => {
+            setInterval(() => {
+                document.querySelectorAll('.alert').forEach(alert => {
+                    if (alert.classList.contains('show')) {
+                        setTimeout(() => {
+                            alert.remove();
+                        }, 5000);
+                    }
+                });
+            }, 1000);
+        });
+
+        // Call fetchListings when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Page loaded, calling fetchListings...');
+            fetchListings();
+        });
+    </script>
+
+    <!-- Add this CSS -->
+    <style>
+        .highlight-row {
+            background-color: rgba(33, 82, 255, 0.1);
+            transition: background-color 0.5s ease;
+        }
+        
+        /* Container for proper notification positioning */
+        .notification-wrapper {
+            position: relative !important;
+            margin-left: 1.5rem;
+        }
+
+        /* Fix notification dropdown positioning */
+        .notification-wrapper .dropdown-menu {
+            position: absolute !important;
+            top: 100% !important;
+            right: 0 !important;
+            left: auto !important;
+            width: 320px;
+            margin-top: 0.5rem !important;
+            transform: none !important;
+            z-index: 9999 !important;
+            box-shadow: 0 8px 26px -4px rgba(20, 20, 20, 0.15);
+        }
+
+        /* Ensure search bar doesn't get overlapped */
+        .input-group-outline {
+            margin-right: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Ensure navbar stays above table but below dropdown */
+        .navbar-main {
+            position: relative;
+            z-index: 1000;
+        }
+
+        /* Fix notification badge positioning */
+        .notification-wrapper .badge {
+            transform: translate(50%, -50%) !important;
+            z-index: 2;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .notification-wrapper .dropdown-menu {
+                position: fixed !important;
+                top: 60px !important;
+                right: 1rem !important;
+                left: auto !important;
+                width: calc(100% - 2rem);
+                max-width: 320px;
+                margin: 0.5rem 0 !important;
+            }
+        }
+    </style>
+</body>
+</html> 

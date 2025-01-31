@@ -1,0 +1,831 @@
+/* Admin Dashboard Styles */
+.sidenav {
+    background: #fff;
+    border-radius: 1.5rem;
+    box-shadow: 0 12px 24px -4px rgba(145, 158, 171, 0.16), 0 0 2px 0 rgba(145, 158, 171, 0.4) !important;
+    z-index: 1040;
+    transition: transform 0.3s ease-in-out;
+    width: 17.125rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin: 1rem;
+    display: block !important;
+    overflow-y: auto; /* Enable vertical scrolling */
+    height: calc(100vh - 2rem); /* Account for margin */
+}
+
+.sidenav .navbar-brand {
+    padding: 1rem;
+}
+
+.sidenav .navbar-brand span {
+    color: #344767 !important;
+    font-weight: 600;
+}
+
+.nav-link {
+    color: #67748e;
+    padding: 0.5rem 0.75rem !important;  /* Reduced from 0.675rem 1rem */
+    margin: 0.1rem 0.75rem !important;   /* Reduced from 0.15rem 1rem */
+    border-radius: 0.5rem;
+    transition: all .15s ease-in;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: #fff;
+    color: #344767;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+.nav-link i {
+    color: inherit;
+}
+
+.navbar-main {
+    backdrop-filter: saturate(200%) blur(30px);
+    background-color: rgba(255, 255, 255, .8);
+    border-radius: 1rem !important;
+    position: relative;
+    z-index: 1000;
+}
+
+.card {
+    box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .15);
+    border: 2px solid #e9ecef !important;  /* Add border */
+    border-radius: 1rem;
+}
+
+.card-header {
+    border-top-left-radius: 1rem !important;
+    border-top-right-radius: 1rem !important;
+}
+
+.card-body {
+    border-radius: 1rem;
+}
+
+.chart-canvas {
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stats-card {
+    background: #ffffff;
+    transition: all 0.2s ease-in-out;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.stats-card .numbers {
+    padding: 0.5rem 0;
+}
+
+.stats-card .icon-shape {
+    width: 48px;
+    height: 48px;
+    background-color: #000000 !important;  /* Changed to black */
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+
+.stats-card .icon-shape i {
+    color: #ffffff !important;  /* White icons */
+    font-size: 1.25rem;
+}
+
+/* Modal Styles */
+.modal-content {
+    border-radius: 1rem;
+    border: none;
+}
+
+.modal-header {
+    border-bottom: 1px solid #e9ecef;
+    padding: 1.5rem;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    border-top: 1px solid #e9ecef;
+    padding: 1.5rem;
+}
+
+/* Add these styles to your admin.css */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.main-content {
+    margin-left: 17.125rem;
+}
+
+.avatar-sm {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+.avatar-sm img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Update input group styles */
+.input-group {
+    border-radius: 1rem;
+}
+
+.input-group-text {
+    border-top-left-radius: 1rem !important;
+    border-bottom-left-radius: 1rem !important;
+}
+
+.input-group .form-control {
+    border-top-right-radius: 1rem !important;
+    border-bottom-right-radius: 1rem !important;
+}
+
+/* Update icon styles */
+.icon-shape {
+    width: 32px !important;  /* Slightly reduced size */
+    height: 32px !important; /* Slightly reduced size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.2rem !important;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06) !important;
+    background: #fff !important;
+    margin-right: 0.75rem !important; /* Reduced from 1rem */
+}
+
+.nav-link:hover .icon-shape,
+.nav-link.active .icon-shape {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    background: #fff !important;
+}
+
+/* Specific styles for sidebar navigation icons */
+.sidenav .nav-item .icon-shape {
+    width: 64px;
+    background-color: #fff;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover effect for icons */
+.sidenav .nav-item:hover .icon-shape {
+    transform: translateX(5px);
+}
+
+/* Active state for icons */
+.sidenav .nav-link.active .icon-shape {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    background: #fff !important;
+    width: 68px;
+}
+
+/* Adjust text spacing */
+.nav-link-text {
+    margin-left: 0.25rem !important; /* Reduced from 0.5rem */
+    font-size: 0.875rem;
+}
+
+/* Update dropdown styles */
+.dropdown-menu {
+    border-radius: 1rem;
+}
+
+.dropdown-item {
+    border-radius: 0.7rem;
+}
+
+/* Badge base styles - with higher specificity */
+body .badge,
+.badge[class*="bg-"] {
+    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem !important;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: capitalize;
+    box-shadow: 0 2px 8px rgba(12, 40, 143, 0.25) !important; /* Changed to blue shadow */
+    border: none !important;
+    background-image: none !important;
+    color: #344767 !important;
+}
+
+/* Role badge colors - with stronger specificity */
+body .badge.bg-primary { 
+    background: #eef2ff !important;
+    color: #2152ff !important;
+    box-shadow: 0 2px 8px rgba(12, 40, 143, 0.25) !important; /* Primary blue shadow */
+}
+body .badge.bg-info { 
+    background: #e8f7fa !important;
+    color: #17c1e8 !important;
+    box-shadow: 0 2px 8px rgba(12, 40, 143, 0.25) !important; /* Info blue shadow */
+}
+body .badge.bg-success { 
+    background: #edfbd0 !important;
+    color: #82d616 !important;
+    box-shadow: 0 2px 8px rgba(12, 40, 143, 0.25) !important; /* Blue shadow */
+}
+body .badge.bg-secondary { 
+    background: #e9ecef !important;
+    color: #627594 !important;
+    box-shadow: 0 2px 8px rgba(12, 40, 143, 0.25) !important; /* Blue shadow */
+}
+
+/* Status badge styles - with stronger specificity */
+body .badge.bg-warning { 
+    background: #fff8dd !important;
+    color: #fb6340 !important;
+    box-shadow: 0 2px 8px rgba(12, 40, 143, 0.25) !important; /* Blue shadow */
+}
+
+/* Remove any conflicting styles */
+body .badge[class*="bg-"]::before,
+body .badge[class*="bg-"]::after {
+    display: none !important;
+}
+
+/* Override any Bootstrap background classes */
+body .badge[class*="bg-"] {
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+    background-clip: initial !important;
+}
+
+/* Remove any background-color from buyer.css */
+body .badge {
+    background-color: transparent;
+}
+
+/* Badge hover effect with enhanced blue shadow */
+body .badge:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(33, 82, 255, 0.35) !important; /* Stronger blue shadow on hover */
+    transition: all 0.2s ease;
+}
+
+/* Update button styles */
+.btn {
+    border-radius: 1rem;
+}
+
+/* Update breadcrumb container styles */
+.breadcrumb-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 0;
+}
+
+/* Update breadcrumb styles */
+.breadcrumb {
+    background-color: transparent;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.breadcrumb-item {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    padding: 0.5rem 0;
+}
+
+.breadcrumb-item a {
+    color: #344767 !important;  /* Enforce consistent color */
+    opacity: 0.5;
+    text-decoration: none;
+}
+
+.breadcrumb-item.active {
+    color: #344767 !important;  /* Enforce consistent color */
+    font-weight: 600;
+    opacity: 1;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "/";
+    color: #344767 !important;  /* Enforce consistent color */
+    opacity: 0.5;
+    padding: 0 0.5rem;  /* Add consistent spacing around slash */
+}
+
+/* Update heading styles */
+.font-weight-bolder {
+    font-weight: 700 !important;
+    color: #344767 !important;  /* Enforce consistent color */
+    font-size: rem;
+    line-height: 1.625;
+    margin-top: 0.25rem;  /* Add space between breadcrumb and heading */
+    margin-bottom: 0;
+}
+
+/* Update navbar container spacing */
+.container-fluid.py-1 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+/* Update breadcrumb list spacing */
+.breadcrumb.me-sm-6.me-5 {
+    margin-right: 4rem !important;
+}
+
+/* Update dashboard title styles */
+.dashboard-title {
+    font-size: 1.25rem; /* 20px for headings */
+    font-weight: 600;
+    color: #344767;
+    margin: 0;
+    padding-left: 0.25rem;
+}
+
+/* Update footer styles */
+.footer {
+    border-radius: 1rem;
+}
+
+/* Navbar icon styles - make all icons consistent */
+.navbar-main .nav-link i {
+    font-size: 1.25rem !important;  /* Consistent size for all icons */
+    width: 32px !important;         /* Match icon-shape width */
+    height: 32px !important;        /* Match icon-shape height */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Specific styles for user icon container */
+.navbar-main .nav-item .nav-link {
+    position: relative;
+    padding: 0.5rem !important;
+    margin: 0 0.5rem !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure all icons in navbar have consistent sizing */
+.navbar-main .nav-link i.bi-gear-fill,
+.navbar-main .nav-link i.bi-bell-fill,
+.navbar-main .nav-link i.fa-user {
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0.5rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Hover effect for all navbar icons */
+.navbar-main .nav-link:hover i {
+    background-color: #f8f9fa;
+    transform: scale(1.05);
+}
+
+/* Adjust notification badge position for larger icons */
+.navbar-nav .nav-link .badge {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    transform: translate(25%, -25%);
+}
+
+/* Ensure proper spacing between navbar items */
+.navbar-nav .nav-item {
+    margin: 0 0.25rem; /* Reduced from 0.5rem */
+}
+
+/* Adjust spacing for specific nav items */
+.nav-item.px-3 {
+    padding-left: 0.5rem !important; /* Reduced from default */
+    padding-right: 0.5rem !important; /* Reduced from default */
+}
+
+/* Base font sizes */
+body {
+    font-size: 0.875rem; /* 14px base font size */
+}
+
+/* Search input */
+.input-group input.form-control {
+    font-size: 0.875rem;
+}
+
+.input-group-text {
+    font-size: 0.875rem;
+}
+
+/* Card titles and content */
+.card-title {
+    font-size: 1.125rem; /* 18px for card titles */
+    font-weight: 600;
+}
+
+.card-text, 
+.stats-card .numbers {
+    font-size: 0.875rem;
+}
+
+/* Table text */
+.table {
+    font-size: 0.875rem;
+}
+
+/* Button text */
+.btn {
+    font-size: 0.875rem;
+}
+
+/* Sidebar navigation */
+.nav-link-text {
+    font-size: 0.875rem; /* Match base font size */
+}
+
+/* Style the scrollbar for better appearance */
+.sidenav::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidenav::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidenav::-webkit-scrollbar-thumb {
+    background-color: rgba(136, 152, 170, 0.3);
+    border-radius: 3px;
+}
+
+/* Update sidenav content container */
+#sidenav-collapse-main {
+    height: auto;
+    min-height: calc(100% - 100px);
+    overflow-y: visible;
+    padding-bottom: 1.5rem; /* Reduced from 2rem */
+}
+
+/* Reduce spacing between nav items */
+.nav-item {
+    padding-left: 0.25rem;  /* Reduced from 0.5rem */
+    margin-bottom: 0.125rem; /* Add small margin between items */
+}
+
+.navbar-nav {
+    padding-left: 0.25rem;  /* Reduced from 0.5rem */
+    padding-right: 0.25rem; /* Reduced from 0.5rem */
+}
+
+/* Reduce spacing between top navbar icons */
+.navbar-main .nav-item {
+    padding-left: 0.25rem !important;  /* Reduced from default */
+    padding-right: 0.25rem !important; /* Reduced from default */
+}
+
+.navbar-main .nav-link {
+    padding: 0.5rem 0.35rem !important; /* Reduced horizontal padding */
+    margin: 0 0.15rem !important;       /* Reduced margin */
+}
+
+/* Adjust icon spacing in top navbar */
+.navbar-main .nav-link i {
+    font-size: 1rem;
+    margin-right: 0.25rem !important;  /* Reduced from default */
+}
+
+/* Ensure consistent icon container sizing in top navbar */
+.navbar-main .icon-shape {
+    width: 32px !important;
+    height: 32px !important;
+    margin-right: 0.25rem !important;
+}
+
+/* Adjust dropdown toggle spacing */
+.navbar-main .dropdown-toggle {
+    padding-right: 0.5rem !important;
+}
+
+/* Ensure proper alignment of notification badges */
+.navbar-main .nav-item.dropdown {
+    position: relative;
+}
+
+/* Reset any conflicting badge styles */
+.navbar-main .nav-link .position-absolute {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    transform: translate(25%, -25%) !important;
+    z-index: 5;
+}
+
+/* Style the badge itself */
+.navbar-main .badge.rounded-pill {
+    min-width: 18px;
+    height: 18px;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 10px !important;
+}
+
+/* Adjust notification icon container */
+.navbar-main .nav-link {
+    position: relative;
+    padding: 0.5rem !important;
+    margin-right: 0.75rem !important;
+}
+
+/* Ensure the notification icon is properly sized and positioned */
+.navbar-main .nav-link i.bi-bell-fill {
+    font-size: 1.25rem;
+    display: block;
+    position: relative;
+    padding: 0;
+}
+
+/* Override any conflicting transform styles */
+.translate-middle {
+    transform: translate(25%, -25%) !important;
+}
+
+/* Adjust the notification dropdown positioning */
+.notification-wrapper .dropdown-menu {
+    position: absolute !important;
+    top: calc(100% + 0.5rem) !important; /* Ensure it appears below the icon */
+    right: 0 !important;
+    left: auto !important;
+    width: 320px; /* Set a fixed width for consistency */
+    margin: 0 !important;
+    transform: none !important;
+    z-index: 1051 !important; /* Ensure it stays above other elements */
+    box-shadow: 0 8px 26px -4px rgba(20, 20, 20, 0.15);
+}
+
+/* Ensure the main content is not overlapped */
+.main-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Adjust notification badge position */
+.nav-link .badge {
+    transform: translate(50%, -50%) !important;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 992px) {
+    .notification-wrapper .dropdown-menu {
+        position: fixed !important;
+        top: 60px !important; /* Adjust top position for mobile */
+        right: 1rem !important;
+        left: auto !important;
+        width: calc(100% - 2rem);
+        max-width: 320px;
+        margin: 0.5rem 0 !important;
+    }
+
+    .input-group-outline {
+        margin-right: 1rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Sidebar icon styles */
+.sidenav .nav-link .icon-shape {
+    background-color: #000000 !important;  /* Changed to black */
+    width: 32px;
+    height: 32px;
+}
+
+.sidenav .nav-link .icon-shape i {
+    color: #ffffff !important;  /* White icons */
+    font-size: 1rem;
+}
+
+/* Active state for sidebar icons */
+.sidenav .nav-link.active .icon-shape {
+    background-color: #000000 !important;
+}
+
+.sidenav .nav-link.active .icon-shape i {
+    color: #ffffff !important;
+}
+
+/* Statistics Cards styles */
+.stats-card {
+    background: #ffffff;
+    transition: all 0.2s ease-in-out;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.stats-card .numbers {
+    padding: 0.5rem 0;
+}
+
+.stats-card .icon-shape {
+    width: 48px;
+    height: 48px;
+    background-color: #000000 !important;  /* Changed to black */
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+
+.stats-card .icon-shape i {
+    color: #ffffff !important;  /* White icons */
+    font-size: 1.25rem;
+}
+
+/* Preserve top-right icon styles */
+.navbar-main .nav-link .icon-shape {
+    background-color: inherit !important;
+}
+
+.navbar-main .nav-link i {
+    color: inherit !important;
+}
+
+/* Additional specificity for icon containers */
+.icon-shape:not(.navbar-main .icon-shape) {
+    background-color: #000000 !important;
+}
+
+.icon-shape:not(.navbar-main .icon-shape) i {
+    color: #ffffff !important;
+}
+
+/* Stats cards specific icon styles */
+.stats-card .icon-shape {
+    background-color: #000000 !important;
+}
+
+.stats-card .icon-shape i {
+    color: #ffffff !important;
+}
+
+/* Sidebar specific icon styles */
+.sidenav .nav-link .icon-shape {
+    background-color: #000000 !important;
+}
+
+.sidenav .nav-link .icon-shape i {
+    color: #ffffff !important;
+}
+
+/* Preserve top navbar icons */
+.navbar-main .nav-link .icon-shape,
+.navbar-main .nav-item .icon-shape {
+    background-color: inherit !important;
+}
+
+.navbar-main .nav-link i,
+.navbar-main .nav-item i {
+    color: inherit !important;
+}
+
+/* Update search-related styles */
+.navbar-search {
+    position: relative;
+    min-width: 300px;
+}
+
+.navbar-search-input {
+    border-radius: 0.5rem;
+    padding-right: 40px;
+}
+
+.search-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border: none;
+    background: transparent;
+    padding: 0 15px;
+    z-index: 4;
+}
+
+.search-button:hover {
+    color: #0d6efd;
+}
+
+.search-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.175);
+    z-index: 1050;
+    display: none;
+}
+
+/* Ensure dropdown items are properly styled */
+.search-results .dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
+/* Add hover effect */
+.search-results .dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+@media (max-width: 768px) {
+    .navbar-search {
+        width: 100%;
+        max-width: none;
+    }
+    
+    .search-dropdown {
+        position: fixed;
+        top: 60px;
+        left: 1rem;
+        right: 1rem;
+        max-width: calc(100% - 2rem);
+    }
+}
+
+/* Add these styles to your existing search-related CSS */
+.search-results {
+    position: relative;
+}
+
+.search-results .dropdown-item.text-center {
+    cursor: default;
+}
+
+.search-results .spinner-border {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.search-results-container {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.search-results .text-xs {
+    font-size: 0.75rem;
+}
+
+.search-dropdown.show {
+    display: block !important;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

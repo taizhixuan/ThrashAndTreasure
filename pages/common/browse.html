@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Treasures | Thrash and Treasure</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="../../assets/css/styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+        <!-- Header -->
+        <header class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="../pages/common/index.html">
+                    <img src="../../assets/images/logo.svg" alt="Thrash and Treasure Platform" height="40">
+                    <span class="ms-2 fw-semibold text-primary">Thrash and Treasure</span>
+                </a>
+                
+                <!-- Search Bar -->
+                <form class="d-none d-lg-flex mx-lg-4 flex-grow-1">
+                    <div class="input-group">
+                        <input type="search" class="form-control border-end-0" placeholder="Search for treasures...">
+                        <button class="btn btn-outline-secondary border-start-0" type="submit">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+    
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/layouts/base.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="browse.html">Browse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex gap-2">
+                        <a href="../pages/common/login.html" class="btn btn-outline-primary px-4">Login</a>
+                        <a href="../pages/common/register.html" class="btn btn-primary px-4">Register</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+    <main class="browse-page py-5">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h1 class="display-5 fw-bold mb-3">Discover Treasures</h1>
+                    <p class="text-muted lead">Find unique items that tell their own stories</p>
+                </div>
+                <div class="col-md-6">
+                    <!-- Search and Filter -->
+                    <div class="search-filter-container">
+                        <form class="d-flex gap-2">
+                            <div class="input-group">
+                                <input type="search" class="form-control" placeholder="Search items...">
+                                <button class="btn btn-outline-secondary" type="submit">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                            <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#filterOptions">
+                                <i class="bi bi-funnel"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Options -->
+            <div class="collapse mb-4" id="filterOptions">
+                <div class="card card-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-select">
+                                <option value="">All Categories</option>
+                                <option>Vintage</option>
+                                <option>Electronics</option>
+                                <option>Furniture</option>
+                                <option>Collectibles</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Price Range</label>
+                            <select class="form-select">
+                                <option value="">Any Price</option>
+                                <option>Under MYR 50</option>
+                                <option>MYR 50 - 100</option>
+                                <option>MYR 100 - 200</option>
+                                <option>Over MYR 200</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Condition</label>
+                            <select class="form-select">
+                                <option value="">Any Condition</option>
+                                <option>Like New</option>
+                                <option>Good</option>
+                                <option>Fair</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Sort By</label>
+                            <select class="form-select">
+                                <option>Latest</option>
+                                <option>Price: Low to High</option>
+                                <option>Price: High to Low</option>
+                                <option>Most Popular</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="row g-4">
+                <!-- Product cards will be dynamically populated -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">
+                                    <i class="bi bi-chevron-left me-1"></i> Previous
+                                </a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">
+                                    Next <i class="bi bi-chevron-right ms-1"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer will be included from base.html -->
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Sample product data - Extended with more products
+        const products = [
+            {
+                id: 1,
+                name: "Vintage Camera",
+                price: 90,
+                description: "1960s Film Camera",
+                image: "../../assets/images/products/vintage-camera.jpg",
+                rating: 4.5,
+                reviews: 28
+            },
+            {
+                id: 2,
+                name: "Vintage Typewriter",
+                price: 150,
+                description: "Classic Mechanical Typewriter",
+                image: "../../assets/images/products/typewriter.jpg",
+                rating: 4.8,
+                reviews: 32,
+                sale: true,
+                originalPrice: 180
+            },
+            {
+                id: 3,
+                name: "Record Player",
+                price: 200,
+                description: "Restored Turntable",
+                image: "../../assets/images/products/vinyl-player.jpg",
+                rating: 5.0,
+                reviews: 45
+            },
+            {
+                id: 4,
+                name: "Art Deco Lamp",
+                price: 55,
+                description: "1930s Table Lamp",
+                image: "../../assets/images/products/vintage-lamp.jpg",
+                rating: 4.0,
+                reviews: 16,
+                sale: true,
+                originalPrice: 90
+            },
+            {
+                id: 5,
+                name: "Antique Clock",
+                price: 88,
+                description: "Victorian Era Timepiece",
+                image: "../../assets/images/products/antique-clock.jpg",
+                rating: 4.2,
+                reviews: 24
+            },
+            {
+                id: 6,
+                name: "Vintage Radio",
+                price: 75,
+                description: "1950s Tube Radio",
+                image: "../../assets/images/products/vintage-radio.jpg",
+                rating: 4.7,
+                reviews: 19
+            }
+        ];
+
+        // Enhanced function to create product cards
+        function createProductCard(product) {
+            return `
+                <div class="col-lg-3 col-md-6">
+                    <div class="card product-card h-100">
+                        <div class="position-relative">
+                            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                            <button class="btn btn-icon-favorite">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                            ${product.sale ? `<span class="badge bg-danger position-absolute top-0 start-0 m-2">Sale!</span>` : ''}
+                            <div class="product-overlay">
+                                <a href="product-details.html?id=${product.id}" class="btn btn-sm btn-light">View Details</a>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h5 class="card-title h6 mb-0">${product.name}</h5>
+                                <div class="text-end">
+                                    ${product.sale ? 
+                                        `<p class="text-decoration-line-through mb-0 small text-muted">MYR ${product.originalPrice}</p>
+                                         <span class="price-tag text-danger">MYR ${product.price}</span>` 
+                                        : 
+                                        `<span class="price-tag">MYR ${product.price}</span>`
+                                    }
+                                </div>
+                            </div>
+                            <p class="text-muted small mb-2">${product.description}</p>
+                            <div class="d-flex align-items-center">
+                                <div class="rating text-warning me-2">
+                                    ${createRatingStars(product.rating)}
+                                </div>
+                                <small class="text-muted">(${product.reviews})</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to create rating stars
+        function createRatingStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    stars += '<i class="bi bi-star-fill"></i>';
+                } else if (i - 0.5 <= rating) {
+                    stars += '<i class="bi bi-star-half"></i>';
+                } else {
+                    stars += '<i class="bi bi-star"></i>';
+                }
+            }
+            return stars;
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            const productsContainer = document.querySelector('.row.g-4');
+            products.forEach(product => {
+                productsContainer.innerHTML += createProductCard(product);
+            });
+        });
+    </script>
+</body>
+</html>

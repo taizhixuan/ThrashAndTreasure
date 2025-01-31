@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Thrash and Treasure Platform</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
+   <!-- Bootstrap CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+   
+   <!-- Custom CSS -->
+   <link href="../../assets/css/styles.css" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+   <!-- Header -->
+   <header class="navbar navbar-expand-lg navbar-light fixed-top bg-white shadow-sm">
+       <div class="container">
+           <a class="navbar-brand" href="../pages/common/index.html">
+               <img src="../../assets/images/logo.svg" alt="Thrash and Treasure Platform" height="40">
+               <span class="ms-2 fw-semibold text-primary">Thrash and Treasure</span>
+           </a>
+           
+           <!-- Search Bar -->
+           <form class="d-none d-lg-flex mx-lg-4 flex-grow-1">
+               <div class="input-group">
+                   <input type="search" class="form-control border-end-0" placeholder="Search for treasures...">
+                   <button class="btn btn-outline-secondary border-start-0" type="submit">
+                       <i class="bi bi-search"></i>
+                   </button>
+               </div>
+           </form>
+
+           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+               <span class="navbar-toggler-icon"></span>
+           </button>
+           
+           <div class="collapse navbar-collapse" id="navbarNav">
+               <ul class="navbar-nav me-auto">
+                   <li class="nav-item">
+                       <a class="nav-link" href="/layouts/base.html">Home</a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link" href="about.html">About</a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link" href="browse.html">Browse</a>
+                   </li>
+                   <li class="nav-item">
+                       <a class="nav-link active" href="contact.html">Contact</a>
+                   </li>
+               </ul>
+               <div class="d-flex gap-2">
+                   <a href="../pages/common/login.html" class="btn btn-outline-primary px-4">Login</a>
+                   <a href="../pages/common/register.html" class="btn btn-primary px-4">Register</a>
+               </div>
+           </div>
+       </div>
+   </header>
+
+    <main class="container my-5 pt-5">
+        <h1 class="text-center mb-5">Contact Us</h1>
+        
+        <div class="row">
+            <!-- Contact Form -->
+            <div class="col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title h4 mb-4">Send us a Message</h2>
+                        <form id="contactForm" action="/api/contact" method="POST">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" name="subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="col-lg-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title h4 mb-4">Contact Information</h2>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <i class="bi bi-geo-alt me-2"></i>
+                                123 Treasure Street, Cyberjaya, Selangor 12345
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-envelope me-2"></i>
+                                support@thrashandtreasure.com
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-telephone me-2"></i>
+                                (+60) 123-45679
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-clock me-2"></i>
+                                Monday - Friday: 9:00 AM - 6:00 PM
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Map -->
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title h4 mb-4">Find Us</h2>
+                        <div id="map" style="height: 300px;" class="rounded">
+                            <!-- Replace with actual map implementation -->
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1234!2d-123.1234567!3d49.1234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM0PCsDEyJzM0LjUiTiAxMjPCsDA3JzM0LjUiVw!5e0!3m2!1sen!2sus!4v1234567890"
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <section class="mt-5">
+            <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h3 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            How do I create an account?
+                        </button>
+                    </h3>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Click on the "Register" button in the top right corner and fill out the registration form with your details.
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more FAQ items as needed -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Include Footer from base.html -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Add form submission logic here
+            alert('Thank you for your message. We will get back to you soon!');
+            this.reset();
+        });
+    </script>
+</body>
+</html> 
