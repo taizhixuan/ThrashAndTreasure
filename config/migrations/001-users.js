@@ -1,4 +1,5 @@
 const { DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
@@ -48,6 +49,19 @@ module.exports = {
             unique: true,
             name: 'users_email_unique'
         });
+
+        // Insert initial admin user
+        const hashedPassword = await bcrypt.hash('admin123', 10);
+        await queryInterface.bulkInsert('users', [{
+            fullName: 'System Administrator',
+            email: 'admin@thrashandtreasure.com',
+            password: hashedPassword,
+            role: 'admin',
+            isVerified: true,
+            verificationToken: null,
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }]);
     },
 
     down: async (queryInterface, Sequelize) => {

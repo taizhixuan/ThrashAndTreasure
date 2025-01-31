@@ -10,8 +10,7 @@ module.exports = {
             },
             sku: {
                 type: DataTypes.STRING(10),
-                allowNull: false,
-                unique: true
+                allowNull: false
             },
             name: {
                 type: DataTypes.STRING(255),
@@ -52,11 +51,10 @@ module.exports = {
             }
         });
 
-        // Add unique constraint for SKU
-        await queryInterface.addConstraint('product', {
-            fields: ['sku'],
-            type: 'unique',
-            name: 'sku'
+        // Add the unique constraint with a different name
+        await queryInterface.addIndex('product', ['sku'], {
+            unique: true,
+            name: 'product_sku_unique'
         });
 
         // Insert initial data
