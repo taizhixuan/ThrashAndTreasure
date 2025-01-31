@@ -57,8 +57,43 @@ module.exports = {
                 Discounted: false,
                 Rating: 4.5,
                 Reviews: 18
+            },
+            {
+                Product_Name: 'Vinyl Record Player',
+                Category: 'Restored Turntable',
+                Price: 30.00,
+                Original_Price: 100.00,
+                Discounted: true,
+                Rating: 4.9,
+                Reviews: 32
+            },
+            {
+                Product_Name: 'Antique Wall Clock',
+                Category: 'Victorian Era Timepiece',
+                Price: 88.00,
+                Original_Price: null,
+                Discounted: false,
+                Rating: 4.7,
+                Reviews: 21
+            },
+            {
+                Product_Name: 'Vintage Radio',
+                Category: '1960s Transistor Radio',
+                Price: 20.00,
+                Original_Price: null,
+                Discounted: false,
+                Rating: 4.6,
+                Reviews: 24
+            },
+            {
+                Product_Name: 'Art Deco Lamp',
+                Category: '1930s Table Lamp',
+                Price: 55.00,
+                Original_Price: 90.00,
+                Discounted: true,
+                Rating: 4.4,
+                Reviews: 16
             }
-            // Add other products...
         ]);
     },
 

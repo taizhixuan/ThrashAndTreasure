@@ -47,6 +47,30 @@ module.exports = {
                 Status: 'Resolved',
                 Reported_Date: '2024-01-15',
                 Reported_Time: '09:15:00'
+            },
+            {
+                Issue_ID: '#ISS-2024-003',
+                Order_ID: '#ORD-2024-167',
+                Issue_Type: 'Wrong Item',
+                Status: 'Open',
+                Reported_Date: '2024-01-16',
+                Reported_Time: '11:45:00'
+            },
+            {
+                Issue_ID: '#ISS-2024-004',
+                Order_ID: '#ORD-2024-189',
+                Issue_Type: 'Delayed Delivery',
+                Status: 'In Progress',
+                Reported_Date: '2024-01-16',
+                Reported_Time: '13:20:00'
+            },
+            {
+                Issue_ID: '#ISS-2024-005',
+                Order_ID: '#ORD-2024-201',
+                Issue_Type: 'Courier Behavior',
+                Status: 'Open',
+                Reported_Date: '2024-01-16',
+                Reported_Time: '15:10:00'
             }
         ]);
     },

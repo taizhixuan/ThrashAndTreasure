@@ -35,6 +35,18 @@ module.exports = {
                 zone_name: 'North Region',
                 manager: 'John Smith',
                 deliveries: 150
+            },
+            {
+                zone_id: 'ZS001',
+                zone_name: 'South Region',
+                manager: 'Jane Doe',
+                deliveries: 120
+            },
+            {
+                zone_id: 'ZW001',
+                zone_name: 'West Region',
+                manager: 'Sarah Wilson',
+                deliveries: 135
             }
         ]);
     },

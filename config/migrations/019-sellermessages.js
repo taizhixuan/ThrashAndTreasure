@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('messages', {
+        await queryInterface.createTable('sellermessages', {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
@@ -18,7 +18,7 @@ module.exports = {
             },
             timestamp: {
                 type: DataTypes.DATE,
-                defaultValue: DataTypes.NOW
+                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
             },
             status: {
                 type: DataTypes.ENUM('sent', 'received'),
@@ -27,16 +27,16 @@ module.exports = {
         });
 
         // Insert initial data
-        await queryInterface.bulkInsert('messages', [
+        await queryInterface.bulkInsert('sellermessages', [
             {
-                sender: 'John Doe',
-                message: 'Hi, I have a question about my order',
+                sender: 'John Smith',
+                message: 'Hi, I\'m interested in the vintage camera you have listed. Is it still available?',
                 timestamp: '2025-01-30 04:34:49',
                 status: 'received'
             },
             {
-                sender: 'Support',
-                message: 'Hello! How can I assist you today?',
+                sender: 'Seller',
+                message: 'Yes, it\'s still available! It\'s in excellent condition.',
                 timestamp: '2025-01-30 04:34:49',
                 status: 'sent'
             }
@@ -44,6 +44,6 @@ module.exports = {
     },
 
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('messages');
+        await queryInterface.dropTable('sellermessages');
     }
-}; 
+};

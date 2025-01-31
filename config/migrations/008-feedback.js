@@ -49,6 +49,13 @@ module.exports = {
                 Rating: 4,
                 Review: 'Beautiful craftsmanship! The clock keeps perfect time and looks stunning.',
                 Review_Date: '2024-03-08'
+            },
+            {
+                Product_Name: 'Vintage Typewriter',
+                Category: 'Office Equipment',
+                Rating: 4,
+                Review: 'Great condition for its age. Keys are smooth and the ribbon still works well.',
+                Review_Date: '2024-03-01'
             }
         ]);
     },

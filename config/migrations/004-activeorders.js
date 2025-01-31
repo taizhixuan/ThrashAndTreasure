@@ -53,8 +53,43 @@ module.exports = {
                 quantity: 1,
                 seller_name: 'Retro Electronics',
                 total: 299.99
+            },
+            {
+                order_id: 'TT-2024-0125',
+                order_date: '2024-03-16',
+                status: 'Out for Delivery',
+                product_name: 'Art Deco Table Lamp',
+                quantity: 1,
+                seller_name: 'Vintage Lighting Co.',
+                total: 129.99
+            },
+            {
+                order_id: 'TT-2025-0001',
+                order_date: '2025-02-05',
+                status: 'Order Placed',
+                product_name: 'M3 Camera',
+                quantity: 1,
+                seller_name: 'Vintage Camera Shop',
+                total: 90.00
+            },
+            {
+                order_id: 'TT-2025-0002',
+                order_date: '2025-02-05',
+                status: 'Order Placed',
+                product_name: 'Radio',
+                quantity: 1,
+                seller_name: 'Retro Electronics',
+                total: 20.00
+            },
+            {
+                order_id: 'TT-2025-0003',
+                order_date: '2025-02-05',
+                status: 'Order Placed',
+                product_name: 'Lamp',
+                quantity: 1,
+                seller_name: 'Vintage Lighting Co.',
+                total: 55.00
             }
-            // Add other orders...
         ]);
     },
 
