@@ -3,18 +3,15 @@ const User = require('../models/User');
 
 async function initializeDatabase() {
     try {
-        // Test the connection
         await sequelize.authenticate();
         console.log('Database connection successful');
 
-        // Sync with more careful options
         await sequelize.sync({ 
             force: false, 
-            alter: false // Changed to false to prevent automatic alterations
+            alter: false 
         });
         console.log('Database synchronized');
 
-        // Create default admin user if it doesn't exist
         const adminExists = await User.findOne({
             where: { email: 'admin@thrashandtreasure.com' }
         });
@@ -24,7 +21,7 @@ async function initializeDatabase() {
                 fullName: 'System Administrator',
                 email: 'admin@thrashandtreasure.com',
                 password: 'Admin@123',
-                role: 'admin', // Changed to lowercase
+                role: 'admin', 
                 isVerified: true
             });
             console.log('Default admin user created');

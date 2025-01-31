@@ -7,7 +7,6 @@ const path = require('path');
 // Get all products
 router.get('/products', async (req, res) => {
     try {
-        // Add console.log for debugging
         console.log('Fetching products...');
         
         const [products] = await db.execute(`

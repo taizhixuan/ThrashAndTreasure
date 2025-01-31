@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const app = express();
 
-// Import routes (remove auth routes)
+// Import routes 
 const adminRoutes = require('./routes/admin');
 const sellerOrdersRoutes = require('./routes/seller/orders');
 const sellerProductsRoutes = require('./routes/seller/products');
@@ -41,7 +41,7 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/buyer/orders', buyerOrdersRoutes);
 app.use('/api/logistics/deliveries', logisticsDeliveriesRoutes);
 
-// Static files (must come after API routes)
+// Static files
 app.use(express.static(path.join(__dirname, '../')));
 app.use('/pages', express.static(path.join(__dirname, '../pages')));
 app.use('/assets', express.static(path.join(__dirname, '../assets')));

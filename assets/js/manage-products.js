@@ -40,7 +40,7 @@ class ProductManager {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                credentials: 'include' // Important for authentication
+                credentials: 'include' 
             });
 
             if (!response.ok) {
