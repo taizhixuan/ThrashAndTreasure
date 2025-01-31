@@ -1,5 +1,6 @@
 const sequelize = require('./database');
 const User = require('../models/User');
+const bcrypt = require('bcrypt');
 
 async function initializeDatabase() {
     try {
@@ -17,19 +18,21 @@ async function initializeDatabase() {
         });
 
         if (!adminExists) {
+            const hashedPassword = await bcrypt.hash('admin123', 10);
             await User.create({
                 fullName: 'System Administrator',
                 email: 'admin@thrashandtreasure.com',
-                password: 'Admin@123',
-                role: 'admin', 
+                password: hashedPassword,
+                role: 'admin',
                 isVerified: true
             });
             console.log('Default admin user created');
         }
 
     } catch (error) {
-        console.error('Database initialization error:', error);
-        throw error;
+        console.error('Database initialization error:', error.message);
+        console.error('Stack trace:', error.stack);
+        process.exit(1); // Exit with error code
     }
 }
 
