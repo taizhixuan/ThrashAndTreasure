@@ -211,10 +211,10 @@
                                             <button class="btn btn-outline-secondary" type="button">+</button>
                                         </div>
                                         <div class="ms-3">
-                                            <button class="btn btn-link text-primary p-0 me-3">
+                                            <button class="btn btn-link text-primary p-0 me-3" onclick="saveForLater(this)">
                                                 <i class="bi bi-bookmark"></i> Save for Later
                                             </button>
-                                            <button class="btn btn-link text-danger p-0">
+                                            <button class="btn btn-link text-danger p-0" onclick="removeFromCart(this)">
                                                 <i class="bi bi-trash"></i> Remove
                                             </button>
                                         </div>
@@ -241,10 +241,10 @@
                                             <button class="btn btn-outline-secondary" type="button">+</button>
                                         </div>
                                         <div class="ms-3">
-                                            <button class="btn btn-link text-primary p-0 me-3">
+                                            <button class="btn btn-link text-primary p-0 me-3" onclick="saveForLater(this)">
                                                 <i class="bi bi-bookmark"></i> Save for Later
                                             </button>
-                                            <button class="btn btn-link text-danger p-0">
+                                            <button class="btn btn-link text-danger p-0" onclick="removeFromCart(this)">
                                                 <i class="bi bi-trash"></i> Remove
                                             </button>
                                         </div>
@@ -271,10 +271,10 @@
                                             <button class="btn btn-outline-secondary" type="button">+</button>
                                         </div>
                                         <div class="ms-3">
-                                            <button class="btn btn-link text-primary p-0 me-3">
+                                            <button class="btn btn-link text-primary p-0 me-3" onclick="saveForLater(this)">
                                                 <i class="bi bi-bookmark"></i> Save for Later
                                             </button>
-                                            <button class="btn btn-link text-danger p-0">
+                                            <button class="btn btn-link text-danger p-0" onclick="removeFromCart(this)">
                                                 <i class="bi bi-trash"></i> Remove
                                             </button>
                                         </div>
@@ -405,14 +405,201 @@
 
     <!-- Add this script right before the closing </body> tag, after the Bootstrap JS -->
     <script>
-        // Get all "Add to Cart" buttons
-        document.querySelectorAll('[class*="btn-primary"]').forEach(button => {
-            if (button.innerHTML.includes('Add to Cart')) {
-                button.addEventListener('click', function() {
-                    const toast = new bootstrap.Toast(document.getElementById('addToCartToast'));
-                    toast.show();
-                });
-            }
+        // Function to handle removing items from cart
+        function removeFromCart(button) {
+            const cartItem = button.closest('.row');
+            
+            // Show removal animation
+            cartItem.style.transition = 'all 0.3s ease';
+            cartItem.style.opacity = '0';
+            cartItem.style.transform = 'translateX(-20px)';
+            
+            setTimeout(() => {
+                cartItem.remove();
+                updateCartCount();
+                updateOrderSummary();
+                
+                // Show success toast
+                const toast = createToast('Item removed from cart', 'danger');
+                document.body.appendChild(toast);
+                const bsToast = new bootstrap.Toast(toast);
+                bsToast.show();
+                
+                // Remove toast after it's hidden
+                toast.addEventListener('hidden.bs.toast', () => toast.remove());
+            }, 300);
+        }
+
+        // Function to handle saving items for later
+        function saveForLater(button) {
+            const cartItem = button.closest('.row');
+            
+            // Show transition animation
+            cartItem.style.transition = 'all 0.3s ease';
+            cartItem.style.opacity = '0';
+            cartItem.style.transform = 'translateX(-20px)';
+            
+            setTimeout(() => {
+                cartItem.remove();
+                updateCartCount();
+                updateOrderSummary();
+                
+                // Show success toast
+                const toast = createToast('Item saved for later', 'info');
+                document.body.appendChild(toast);
+                const bsToast = new bootstrap.Toast(toast);
+                bsToast.show();
+                
+                // Remove toast after it's hidden
+                toast.addEventListener('hidden.bs.toast', () => toast.remove());
+            }, 300);
+        }
+
+        // Helper function to create toast notifications
+        function createToast(message, type) {
+            const toastDiv = document.createElement('div');
+            toastDiv.className = 'position-fixed bottom-0 end-0 p-3';
+            toastDiv.style.zIndex = '11';
+            toastDiv.innerHTML = `
+                <div class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            <i class="bi bi-${type === 'danger' ? 'trash' : 'bookmark'} me-2"></i>
+                            ${message}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            `;
+            return toastDiv;
+        }
+
+        // Function to update cart count
+        function updateCartCount() {
+            // Specifically target rows within the shopping cart card body
+            const cartItems = document.querySelector('.col-lg-8 .card .card-body').querySelectorAll('.row').length;
+            document.querySelector('.col-lg-8 .card-header h5').textContent = `Shopping Cart (${cartItems} items)`;
+        }
+
+        // Function to update order summary
+        function updateOrderSummary() {
+            const cartItems = document.querySelector('.col-lg-8 .card .card-body').querySelectorAll('.row');
+            let subtotal = 0;
+            
+            cartItems.forEach(item => {
+                const priceText = item.querySelector('.col-md-3 h6').textContent;
+                const price = parseFloat(priceText.replace('MYR ', ''));
+                subtotal += price;
+            });
+
+            const tax = subtotal * 0.05; // 5% tax
+            const total = subtotal + tax;
+
+            // Update summary values
+            document.querySelector('.col-lg-4 .card-body .d-flex:nth-child(2) span:last-child').textContent = `MYR ${subtotal.toFixed(2)}`;
+            document.querySelector('.col-lg-4 .card-body .d-flex:nth-child(4) span:last-child').textContent = `MYR ${tax.toFixed(2)}`;
+            document.querySelector('.col-lg-4 .card-body .d-flex:nth-child(5) strong:last-child').textContent = `MYR ${total.toFixed(2)}`;
+        }
+
+        // Add event listeners to all Save for Later and Remove buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers for Save for Later buttons
+            document.querySelectorAll('.btn-link:has(.bi-bookmark)').forEach(button => {
+                button.onclick = function() {
+                    saveForLater(this);
+                };
+            });
+
+            // Add click handlers for Remove buttons
+            document.querySelectorAll('.btn-link:has(.bi-trash)').forEach(button => {
+                button.onclick = function() {
+                    removeFromCart(this);
+                };
+            });
+        });
+
+        // Add these functions to handle wishlist-to-cart functionality
+        function moveToCart(button) {
+            const wishlistItem = button.closest('.row');
+            const productName = wishlistItem.querySelector('h6.mb-1').textContent;
+            const sellerName = wishlistItem.querySelector('p.text-sm').textContent.replace('Seller: ', '');
+            const price = wishlistItem.querySelector('h6.mb-0').textContent;
+            const imgSrc = wishlistItem.querySelector('img').src;
+
+            // Create new cart item HTML
+            const cartItemHTML = `
+                <div class="row mb-4 border-bottom pb-4">
+                    <div class="col-md-2">
+                        <img src="${imgSrc}" class="img-fluid rounded" alt="${productName}">
+                    </div>
+                    <div class="col-md-7">
+                        <h6 class="mb-1">${productName}</h6>
+                        <p class="text-sm text-secondary mb-2">Seller: ${sellerName}</p>
+                        <div class="d-flex align-items-center">
+                            <div class="input-group input-group-sm" style="width: 120px;">
+                                <button class="btn btn-outline-secondary" type="button">-</button>
+                                <input type="number" class="form-control text-center" value="1">
+                                <button class="btn btn-outline-secondary" type="button">+</button>
+                            </div>
+                            <div class="ms-3">
+                                <button class="btn btn-link text-primary p-0 me-3" onclick="saveForLater(this)">
+                                    <i class="bi bi-bookmark"></i> Save for Later
+                                </button>
+                                <button class="btn btn-link text-danger p-0" onclick="removeFromCart(this)">
+                                    <i class="bi bi-trash"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-end">
+                        <h6 class="mb-0">${price}</h6>
+                        <small class="text-success">Free Shipping</small>
+                    </div>
+                </div>
+            `;
+
+            // Add to cart
+            const cartBody = document.querySelector('.col-lg-8 .card .card-body');
+            cartBody.insertAdjacentHTML('afterbegin', cartItemHTML);
+
+            // Remove from wishlist with animation
+            wishlistItem.style.transition = 'all 0.3s ease';
+            wishlistItem.style.opacity = '0';
+            wishlistItem.style.transform = 'translateX(-20px)';
+            
+            setTimeout(() => {
+                wishlistItem.remove();
+                updateWishlistCount();
+                updateCartCount();
+                updateOrderSummary();
+                
+                // Show success toast
+                const toast = createToast('Item moved to cart', 'success');
+                document.body.appendChild(toast);
+                const bsToast = new bootstrap.Toast(toast);
+                bsToast.show();
+                
+                // Remove toast after it's hidden
+                toast.addEventListener('hidden.bs.toast', () => toast.remove());
+            }, 300);
+        }
+
+        // Add function to update wishlist count
+        function updateWishlistCount() {
+            const wishlistItems = document.querySelector('.card.mb-4 .card-body').querySelectorAll('.row').length;
+            document.querySelector('.card.mb-4 .card-header h5').textContent = `My Wishlist (${wishlistItems} items)`;
+        }
+
+        // Update the event listeners section
+        document.addEventListener('DOMContentLoaded', function() {
+            // Existing cart button handlers...
+
+            // Add click handlers for Add to Cart buttons in wishlist
+            document.querySelectorAll('.btn-primary:has(.bi-cart-plus)').forEach(button => {
+                button.onclick = function() {
+                    moveToCart(this);
+                };
+            });
         });
     </script>
 </body>

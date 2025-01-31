@@ -192,7 +192,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body p-3">
-                            <form>
+                            <form id="searchForm">
                                 <div class="row align-items-center">
                                     <div class="col-lg-8 mb-3 mb-lg-0">
                                         <div class="input-group input-group-lg">
@@ -200,6 +200,7 @@
                                                 <i class="bi bi-search"></i>
                                             </span>
                                             <input type="text" class="form-control border-start-0 ps-0" 
+                                                   id="searchInput"
                                                    placeholder="Search for vintage items, antiques, collectibles...">
                                             <button class="btn btn-primary" type="submit">Search</button>
                                         </div>
@@ -529,12 +530,53 @@
 
     <!-- Add this script right before the closing </body> tag, after the Bootstrap JS -->
     <script>
-        // Get all cart buttons (both text and icon buttons)
-        document.querySelectorAll('.btn-primary').forEach(button => {
+        // Get only the cart buttons by targeting buttons with the cart-plus icon
+        document.querySelectorAll('.btn-primary:has(.bi-cart-plus)').forEach(button => {
             button.addEventListener('click', function() {
                 const toast = new bootstrap.Toast(document.getElementById('addToCartToast'));
                 toast.show();
             });
+        });
+
+        // Search functionality
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const productCards = document.querySelectorAll('.product-card');
+            let hasVisibleProducts = false;
+
+            // Remove existing no results message if it exists
+            const existingNoResults = document.getElementById('noResults');
+            if (existingNoResults) {
+                existingNoResults.remove();
+            }
+
+            productCards.forEach(card => {
+                const productTitle = card.querySelector('.card-title').textContent.toLowerCase();
+                const productDescription = card.querySelector('.text-muted.small').textContent.toLowerCase();
+                
+                // Show/hide cards based on search term
+                if (productTitle.includes(searchTerm) || productDescription.includes(searchTerm)) {
+                    card.closest('.col-xl-3').style.display = '';  // Use empty string instead of 'block'
+                    hasVisibleProducts = true;
+                } else {
+                    card.closest('.col-xl-3').style.display = 'none';
+                }
+            });
+
+            // Show message only if no products are visible and there is a search term
+            if (!hasVisibleProducts && searchTerm !== '') {
+                const productsContainer = document.querySelector('.row');
+                const noResults = document.createElement('div');
+                noResults.id = 'noResults';
+                noResults.className = 'col-12 text-center py-5';
+                noResults.innerHTML = `
+                    <h4 class="text-muted">No products found</h4>
+                    <p>Try different keywords or browse our categories</p>
+                `;
+                productsContainer.appendChild(noResults);
+            }
         });
     </script>
 </body>

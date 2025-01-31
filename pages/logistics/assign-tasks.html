@@ -324,6 +324,19 @@
         </div>
     </div>
 
+    <!-- Add this success toast element before the closing </body> tag -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="assignSuccessToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle me-2"></i>
+                    Task assigned successfully!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- jQuery -->
@@ -423,41 +436,86 @@
                 }
             });
 
-            // Handle individual task assignment button
-            $('.btn-assign').click(function() {
+            // Update the assign button click handler
+            $('button[data-bs-toggle="modal"]').click(function() {
                 const row = $(this).closest('tr');
-                const orderId = row.find('td:eq(1)').text();
-                const product = row.find('td:eq(2) span').text();
+                const orderId = row.find('td:nth-child(2)').text(); // Get Order ID from second column
                 
-                // Store the order details in the modal
-                $('#assignTaskModal').data('orderId', orderId);
-                $('#assignTaskModal').data('product', product);
+                // Store the row reference in the modal's data
+                $('#assignTaskModal').data('taskRow', row);
             });
 
-            // Handle assignment confirmation
+            // Update the confirm assignment handler
             $('#confirmAssignment').click(function() {
-                const orderId = $('#assignTaskModal').data('orderId');
                 const providerType = $('#providerType').val();
                 const courier = providerType === 'internal' ? 
                     $('#internalCourierSelect').val() : 
                     $('#3plSelect').val();
-                const priority = $('#prioritySelect').val();
                 const deadline = $('#deadlineInput').val();
-                const instructions = $('#instructionsInput').val();
 
                 if (!courier || !deadline) {
                     alert('Please fill in all required fields');
                     return;
                 }
 
-                // Here you would typically make an API call to assign the task
-                // For now, we'll just show a success message
-                alert(`Task ${orderId} assigned successfully to ${courier}`);
-                $('#assignTaskModal').modal('hide');
+                // Get the row that was stored when opening the modal
+                const taskRow = $('#assignTaskModal').data('taskRow');
+                
+                // Remove the row with animation
+                taskRow.fadeOut(300, function() {
+                    $(this).remove();
+                    updateEmptyTableMessage();
+                    
+                    // Show success toast
+                    const toast = new bootstrap.Toast(document.getElementById('assignSuccessToast'));
+                    toast.show();
+                });
 
-                // Reset form
+                // Close modal and reset form
+                $('#assignTaskModal').modal('hide');
                 $('#assignTaskForm')[0].reset();
             });
+
+            // Handle bulk assignment
+            $('#confirmBulkAssign').click(function() {
+                const selectedTasks = $('.task-checkbox:checked');
+                
+                if (selectedTasks.length === 0) {
+                    alert('Please select at least one task to assign');
+                    return;
+                }
+
+                selectedTasks.each(function() {
+                    const taskRow = $(this).closest('tr');
+                    taskRow.fadeOut(300, function() {
+                        $(this).remove();
+                        updateEmptyTableMessage();
+                    });
+                });
+
+                // Show success toast
+                const toast = new bootstrap.Toast(document.getElementById('assignSuccessToast'));
+                toast.show();
+
+                // Reset checkboxes and close modal
+                $('#selectAll').prop('checked', false);
+                $('#bulkAssignModal').modal('hide');
+            });
+
+            // Function to update empty table message
+            function updateEmptyTableMessage() {
+                const tableBody = $('table tbody');
+                if (tableBody.children().length === 0) {
+                    tableBody.append(`
+                        <tr id="emptyMessage">
+                            <td colspan="6" class="text-center py-4">
+                                <h6 class="text-muted mb-0">No pending tasks available</h6>
+                                <p class="text-sm mb-0">All tasks have been assigned</p>
+                            </td>
+                        </tr>
+                    `);
+                }
+            }
         });
     </script>
 </body>

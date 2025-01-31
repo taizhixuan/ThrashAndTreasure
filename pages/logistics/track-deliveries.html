@@ -47,6 +47,17 @@
         .timeline-item:last-child {
             border-left: none;
         }
+        .custom-div-icon {
+            background: white;
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .custom-div-icon i {
+            font-size: 16px;
+        }
     </style>
 </head>
 <body class="g-sidenav-show bg-gray-100">
@@ -339,8 +350,8 @@
                             <div class="delivery-info">
                                 <p><strong>Order ID:</strong> <span id="modalOrderId">#ORD-2024-001</span></p>
                                 <p><strong>Customer:</strong> <span id="modalCustomer">Alice Brown</span></p>
-                                <p><strong>Delivery Address:</strong> <span id="modalAddress">123 Main St, City</span></p>
-                                <p><strong>Contact:</strong> <span id="modalContact">+1 234-567-8900</span></p>
+                                <p><strong>Delivery Address:</strong> <span id="modalAddress">Shaftsbury Square, Cyberjaya</span></p>
+                                <p><strong>Contact:</strong> <span id="modalContact">+60 12-345-6789</span></p>
                             </div>
                             <h6 class="text-sm mt-4">Delivery Progress</h6>
                             <div class="timeline">
@@ -387,22 +398,79 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
+        // Define delivery icons before map initialization
+        const deliveryIcons = {
+            'on-way': L.icon({
+                iconUrl: '../../../assets/images/map-icons/delivery-truck.png',
+                iconSize: [32, 32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -32]
+            }),
+            'delayed': L.icon({
+                iconUrl: '../../../assets/images/map-icons/delayed.png',
+                iconSize: [32, 32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -32]
+            }),
+            'delivered': L.icon({
+                iconUrl: '../../../assets/images/map-icons/delivered.png',
+                iconSize: [32, 32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -32]
+            })
+        };
+
         $(document).ready(function() {
-            // Initialize map
-            const map = L.map('deliveryMap').setView([51.505, -0.09], 13);
+            let modalMap = null;
+            
+            // Initialize map centered on Cyberjaya, Malaysia
+            const map = L.map('deliveryMap').setView([2.9188, 101.6520], 13);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-            // Add sample delivery markers
+            // Add sample delivery markers around Cyberjaya
             const deliveries = [
-                { id: 1, lat: 51.505, lng: -0.09, status: 'on-way' },
-                { id: 2, lat: 51.51, lng: -0.1, status: 'delayed' },
-                { id: 3, lat: 51.515, lng: -0.095, status: 'delivered' }
+                { 
+                    id: 1, 
+                    lat: 2.9188, 
+                    lng: 101.6520, 
+                    status: 'on-way',
+                    location: 'Shaftsbury Square',
+                    eta: '15:30'
+                },
+                { 
+                    id: 2, 
+                    lat: 2.9231, 
+                    lng: 101.6565, 
+                    status: 'delayed',
+                    location: 'Tamarind Square',
+                    eta: '16:45'
+                },
+                { 
+                    id: 3, 
+                    lat: 2.9150, 
+                    lng: 101.6585, 
+                    status: 'delivered',
+                    location: 'Multimedia University',
+                    eta: 'Delivered'
+                }
             ];
 
+            // Add markers with custom icons and popups
             deliveries.forEach(delivery => {
-                const marker = L.marker([delivery.lat, delivery.lng])
-                    .bindPopup(`Delivery #${delivery.id}<br>Status: ${delivery.status}`)
-                    .addTo(map);
+                const marker = L.marker([delivery.lat, delivery.lng], {
+                    icon: deliveryIcons[delivery.status]
+                })
+                .bindPopup(`
+                    <div class="popup-content">
+                        <h6 class="mb-1">Delivery #${delivery.id}</h6>
+                        <p class="mb-1"><strong>Location:</strong> ${delivery.location}</p>
+                        <p class="mb-1"><strong>Status:</strong> ${delivery.status}</p>
+                        <p class="mb-0"><strong>ETA:</strong> ${delivery.eta}</p>
+                    </div>
+                `, {
+                    className: 'custom-popup'
+                })
+                .addTo(map);
             });
 
             // Filter functionality
@@ -420,67 +488,50 @@
             });
         });
 
-        // Enhanced map markers with custom icons
-        const deliveryIcons = {
-            'on-way': L.icon({
-                iconUrl: '../../../assets/images/icons/delivery-truck.png',
-                iconSize: [32, 32]
-            }),
-            'delayed': L.icon({
-                iconUrl: '../../../assets/images/icons/delayed.png',
-                iconSize: [32, 32]
-            }),
-            'delivered': L.icon({
-                iconUrl: '../../../assets/images/icons/delivered.png',
-                iconSize: [32, 32]
-            })
-        };
-
-        // Sample delivery data
+        // Update the delivery data with Cyberjaya locations
         const deliveryData = {
             1: {
                 orderId: '#ORD-2024-001',
                 customer: 'Alice Brown',
-                address: '123 Main St, City',
-                contact: '+1 234-567-8900',
+                address: 'Shaftsbury Square, Cyberjaya',
+                contact: '+60 12-345-6789',
                 status: 'on-way',
                 eta: '15:30',
                 route: [
-                    [51.505, -0.09],
-                    [51.51, -0.085],
-                    [51.515, -0.08]
+                    [2.9188, 101.6520], // Shaftsbury Square
+                    [2.9200, 101.6540], // Intermediate point
+                    [2.9220, 101.6550]  // Destination
                 ]
             },
             2: {
                 orderId: '#ORD-2024-002',
                 customer: 'Bob Wilson',
-                address: '456 Oak Ave, Town',
-                contact: '+1 234-567-8901',
+                address: 'Tamarind Square, Cyberjaya',
+                contact: '+60 12-345-6790',
                 status: 'delayed',
                 eta: '16:45',
                 route: [
-                    [51.51, -0.1],
-                    [51.515, -0.095],
-                    [51.52, -0.09]
+                    [2.9231, 101.6565], // Tamarind Square
+                    [2.9240, 101.6575], // Intermediate point
+                    [2.9250, 101.6585]  // Destination
                 ]
             }
         };
 
-        // Track specific delivery
-        function trackDelivery(deliveryId) {
+        // Update the trackDelivery function
+        window.trackDelivery = function(deliveryId) {
             const delivery = deliveryData[deliveryId];
-            map.setView(delivery.route[0], 14);
+            map.setView(delivery.route[0], 15); // Increased zoom level for better detail
             // Draw route line
             L.polyline(delivery.route, {color: 'blue', weight: 3}).addTo(map);
         }
 
-        // Initialize modal map
-        let modalMap;
+        // Update modal map initialization
         $('#deliveryDetailsModal').on('shown.bs.modal', function(e) {
             const deliveryId = $(e.relatedTarget).data('delivery-id');
             const delivery = deliveryData[deliveryId];
             
-            // Update modal content
+            // Update modal content with Malaysian format
             $('#modalOrderId').text(delivery.orderId);
             $('#modalCustomer').text(delivery.customer);
             $('#modalAddress').text(delivery.address);
@@ -488,8 +539,10 @@
 
             // Initialize modal map if not already initialized
             if (!modalMap) {
-                modalMap = L.map('modalMap').setView(delivery.route[0], 14);
+                modalMap = L.map('modalMap').setView(delivery.route[0], 15);
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(modalMap);
+            } else {
+                modalMap.setView(delivery.route[0], 15);
             }
             
             // Clear previous layers and add new route

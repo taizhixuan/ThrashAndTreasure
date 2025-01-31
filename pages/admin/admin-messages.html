@@ -463,5 +463,45 @@
             color: #344767;
         }
     </style>
+
+    <!-- Update the script section -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        // Listen for the message form submission
+        $('.message-input form').on('submit', function(e) {
+        e.preventDefault();
+
+        // Get the message text from the input field
+        const messageInput = $(this).find('input[type="text"]');
+        const message = messageInput.val().trim();
+
+        // If the message is not empty, append it to the chat container
+        if (message) {
+            // Create the HTML structure for the sent message
+            const messageHTML = `
+            <div class="message-sent mb-3">
+                <div class="d-flex justify-content-end">
+                <div class="message-content p-3 rounded bg-primary text-white">
+                    <p class="mb-0">${message}</p>
+                    <small class="text-white-50">${new Date().toLocaleTimeString()}</small>
+                </div>
+                </div>
+            </div>
+            `;
+
+            // Append the new message to the chat container
+            $('.chat-container').append(messageHTML);
+
+            // Clear the input field for the next message
+            messageInput.val('');
+
+            // Scroll to the bottom of the chat container
+            const chatContainer = $('.chat-container');
+            chatContainer.scrollTop(chatContainer[0].scrollHeight);
+        }
+        });
+    });
+    </script>
 </body>
 </html> 

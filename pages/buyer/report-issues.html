@@ -24,11 +24,12 @@
         }
 
         .evidence-preview {
+            flex: 0 0 auto;
             width: 100px;
             height: 100px;
             position: relative;
             margin-right: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 0;
         }
 
         .evidence-preview img {
@@ -71,6 +72,16 @@
         .upload-placeholder:hover {
             background: #e9ecef;
             border-color: #adb5bd;
+        }
+
+        .evidence-container {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            max-width: 100%;
+            overflow-x: auto;
+            padding-bottom: 10px;
         }
     </style>
 </head>
@@ -259,7 +270,7 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Order ID</label>
-                                        <select class="form-select" required>
+                                        <select class="form-select" name="orderId" required>
                                             <option value="">Select Order</option>
                                             <option value="TT-2024-0122">#TT-2024-0122 - Vintage Camera</option>
                                             <option value="TT-2024-0123">#TT-2024-0123 - Antique Clock</option>
@@ -268,7 +279,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label">Issue Type</label>
-                                        <select class="form-select" required>
+                                        <select class="form-select" name="issueType" required>
                                             <option value="">Select Issue Type</option>
                                             <option>Product Damaged</option>
                                             <option>Wrong Item Received</option>
@@ -280,23 +291,27 @@
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label class="form-label">Issue Description</label>
-                                        <textarea class="form-control" rows="4" required placeholder="Please describe the issue in detail..."></textarea>
+                                        <textarea class="form-control" name="description" rows="4" required placeholder="Please describe the issue in detail..."></textarea>
                                         <div class="invalid-feedback">Please provide a description.</div>
                                     </div>
                                     <div class="col-12 mb-3">
-                                        <label class="form-label">Upload Evidence</label>
-                                        <div class="d-flex flex-wrap" id="evidenceContainer">
-                                            <div class="evidence-preview">
-                                                <input type="file" class="evidence-input" accept="image/*" style="display: none;">
-                                                <div class="upload-placeholder h-100 d-flex align-items-center justify-content-center">
-                                                    <i class="bi bi-plus-lg fs-4 text-muted"></i>
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div class="flex-grow-1 me-3">
+                                                <label class="form-label">Upload Evidence</label>
+                                                <div class="evidence-container" id="evidenceContainer">
+                                                    <div class="evidence-preview">
+                                                        <input type="file" class="evidence-input" accept="image/*" style="display: none;">
+                                                        <div class="upload-placeholder h-100 d-flex align-items-center justify-content-center">
+                                                            <i class="bi bi-plus-lg fs-4 text-muted"></i>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                                <small class="text-muted">Upload up to 5 images (Max 5MB each)</small>
+                                            </div>
+                                            <div class="mt-4">
+                                                <button type="submit" class="btn btn-primary">Submit Report</button>
                                             </div>
                                         </div>
-                                        <small class="text-muted">Upload up to 5 images (Max 5MB each)</small>
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary">Submit Report</button>
                                     </div>
                                 </div>
                             </form>
@@ -355,10 +370,10 @@
                                                 <span class="text-secondary text-xs font-weight-bold">March 1, 2024</span>
                                             </td>
                                             <td>
-                                                <button class="btn btn-link text-primary mb-0">
+                                                <button class="btn btn-link text-primary mb-0" onclick="viewReport(this)">
                                                     <i class="bi bi-eye text-xs"></i> View
                                                 </button>
-                                                <button class="btn btn-link text-info mb-0">
+                                                <button class="btn btn-link text-info mb-0" onclick="contactSupport(this)">
                                                     <i class="bi bi-chat-dots text-xs"></i> Contact
                                                 </button>
                                             </td>
@@ -387,10 +402,10 @@
                                                 <span class="text-secondary text-xs font-weight-bold">March 8, 2024</span>
                                             </td>
                                             <td>
-                                                <button class="btn btn-link text-primary mb-0">
+                                                <button class="btn btn-link text-primary mb-0" onclick="viewReport(this)">
                                                     <i class="bi bi-eye text-xs"></i> View
                                                 </button>
-                                                <button class="btn btn-link text-info mb-0">
+                                                <button class="btn btn-link text-info mb-0" onclick="contactSupport(this)">
                                                     <i class="bi bi-chat-dots text-xs"></i> Contact
                                                 </button>
                                             </td>
@@ -419,10 +434,10 @@
                                                 <span class="text-secondary text-xs font-weight-bold">March 5, 2024</span>
                                             </td>
                                             <td>
-                                                <button class="btn btn-link text-primary mb-0">
+                                                <button class="btn btn-link text-primary mb-0" onclick="viewReport(this)">
                                                     <i class="bi bi-eye text-xs"></i> View
                                                 </button>
-                                                <button class="btn btn-link text-info mb-0">
+                                                <button class="btn btn-link text-info mb-0" onclick="contactSupport(this)">
                                                     <i class="bi bi-chat-dots text-xs"></i> Contact
                                                 </button>
                                             </td>
@@ -442,16 +457,272 @@
 
     <!-- Form validation and file upload -->
     <script>
-        // Form validation
+        // Function to format date
+        function formatDate(date) {
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+
+        // Form validation and submission
         document.querySelector('form').addEventListener('submit', function(e) {
-            if (!this.checkValidity()) {
-                e.preventDefault();
-                e.stopPropagation();
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (this.checkValidity()) {
+                // Get form values
+                const orderSelect = document.querySelector('select[name="orderId"]');
+                const orderText = orderSelect.options[orderSelect.selectedIndex].text;
+                const issueType = document.querySelector('select[name="issueType"]').value;
+                const description = document.querySelector('textarea[name="description"]').value;
+                const reportId = `#REP-2024-${Math.floor(Math.random() * 1000).toString().padStart(3, '0')}`;
+
+                // Extract product name from order text
+                const productName = orderText.split(' - ')[1];
+                const orderId = orderText.split(' - ')[0];
+
+                // Create new report row
+                const newReport = `
+                    <tr>
+                        <td>
+                            <p class="text-xs font-weight-bold mb-0 ps-3">${reportId}</p>
+                        </td>
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm">${productName}</h6>
+                                    <p class="text-xs text-secondary mb-0">${orderId}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="text-xs font-weight-bold mb-0">${issueType}</p>
+                        </td>
+                        <td>
+                            <span class="badge bg-warning">In Progress</span>
+                        </td>
+                        <td>
+                            <span class="text-secondary text-xs font-weight-bold">${formatDate(new Date())}</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-link text-primary mb-0" onclick="viewReport(this)">
+                                <i class="bi bi-eye text-xs"></i> View
+                            </button>
+                            <button class="btn btn-link text-info mb-0" onclick="contactSupport(this)">
+                                <i class="bi bi-chat-dots text-xs"></i> Contact
+                            </button>
+                        </td>
+                    </tr>
+                `;
+
+                // Add new report to the top of the table
+                const reportsTableBody = document.querySelector('.table tbody');
+                reportsTableBody.insertAdjacentHTML('afterbegin', newReport);
+
+                // Collect evidence images
+                const evidenceImages = [];
+                document.querySelectorAll('.evidence-preview img').forEach(img => {
+                    evidenceImages.push(img.src);
+                });
+
+                // Store report data in element's dataset
+                const reportData = {
+                    id: reportId,
+                    description: description,
+                    evidence: evidenceImages
+                };
+                reportsTableBody.firstElementChild.dataset.reportData = JSON.stringify(reportData);
+
+                // Show success message
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-success alert-dismissible fade show';
+                alertDiv.innerHTML = `
+                    Report submitted successfully!
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                `;
+                document.querySelector('.container-fluid').insertAdjacentElement('afterbegin', alertDiv);
+
+                // Reset form
+                this.reset();
+                document.querySelectorAll('.evidence-preview img, .evidence-preview .evidence-remove').forEach(el => el.remove());
+                document.querySelectorAll('.upload-placeholder').forEach(el => el.style.display = 'flex');
+
+                // Remove alert after 5 seconds
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, 5000);
             }
             this.classList.add('was-validated');
         });
 
-        // Evidence upload functionality
+        // Initialize mock data for existing reports
+        document.addEventListener('DOMContentLoaded', function() {
+            const existingRows = document.querySelectorAll('.table tbody tr');
+            
+            existingRows.forEach(row => {
+                // Create mock data for each existing row
+                const mockData = {
+                    id: row.querySelector('td:nth-child(1) p').textContent,
+                    description: "This is a detailed description of the issue. The customer has reported problems with the product and requires assistance.",
+                    evidence: [
+                        "https://picsum.photos/200/200?random=1",
+                        "https://picsum.photos/200/200?random=2"
+                    ]
+                };
+                
+                // Store the mock data in the row's dataset
+                row.dataset.reportData = JSON.stringify(mockData);
+            });
+        });
+
+        // Update the viewReport function to handle missing elements gracefully
+        function viewReport(button) {
+            const row = button.closest('tr');
+            const reportData = JSON.parse(row.dataset.reportData || '{}');
+            
+            // Get data from row, with fallbacks for missing elements
+            const reportId = row.querySelector('td:nth-child(1) p')?.textContent || 'N/A';
+            const orderDetails = row.querySelector('td:nth-child(2) h6')?.textContent || 'N/A';
+            const issueType = row.querySelector('td:nth-child(3) p')?.textContent || 'N/A';
+            const status = row.querySelector('td:nth-child(4) span')?.textContent || 'N/A';
+            const date = row.querySelector('td:nth-child(5) span')?.textContent || 'N/A';
+
+            // Create or update modal
+            if (!document.getElementById('viewReportModal')) {
+                const modalHTML = `
+                    <div class="modal fade" id="viewReportModal" tabindex="-1">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Report Details</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p><strong>Report ID:</strong> <span id="reportId"></span></p>
+                                            <p><strong>Order:</strong> <span id="orderDetails"></span></p>
+                                            <p><strong>Issue Type:</strong> <span id="issueType"></span></p>
+                                            <p><strong>Status:</strong> <span id="status"></span></p>
+                                            <p><strong>Date Submitted:</strong> <span id="dateSubmitted"></span></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><strong>Description:</strong></p>
+                                            <p id="description" class="text-muted"></p>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3">
+                                        <h6>Attached Evidence</h6>
+                                        <div id="evidenceGallery" class="d-flex flex-wrap gap-2 mt-2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.insertAdjacentHTML('beforeend', modalHTML);
+            }
+
+            // Populate modal with data
+            document.getElementById('reportId').textContent = reportId;
+            document.getElementById('orderDetails').textContent = orderDetails;
+            document.getElementById('issueType').textContent = issueType;
+            document.getElementById('status').textContent = status;
+            document.getElementById('dateSubmitted').textContent = date;
+            document.getElementById('description').textContent = reportData.description || 'No description provided.';
+
+            // Display evidence images
+            const evidenceGallery = document.getElementById('evidenceGallery');
+            evidenceGallery.innerHTML = '';
+            if (reportData.evidence && reportData.evidence.length > 0) {
+                reportData.evidence.forEach(src => {
+                    evidenceGallery.innerHTML += `
+                        <div class="evidence-preview">
+                            <img src="${src}" alt="Evidence" style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px;">
+                        </div>
+                    `;
+                });
+            } else {
+                evidenceGallery.innerHTML = '<p class="text-muted">No evidence attached</p>';
+            }
+
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('viewReportModal'));
+            modal.show();
+        }
+
+        // Update the contactSupport function to work with the table
+        function contactSupport(button) {
+            const row = button.closest('tr');
+            const reportId = row.querySelector('td:nth-child(1) p').textContent;
+            
+            // Create modal if it doesn't exist
+            if (!document.getElementById('contactSupportModal')) {
+                const modalHTML = `
+                    <div class="modal fade" id="contactSupportModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Contact Support</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <p class="text-muted mb-3">Regarding Report: <strong id="modalReportId"></strong></p>
+                                        <label class="form-label">Message</label>
+                                        <textarea class="form-control" rows="4" placeholder="Type your message here..."></textarea>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2 p-3 bg-light rounded">
+                                        <i class="bi bi-info-circle text-primary"></i>
+                                        <small class="text-muted">Support team typically responds within 24 hours.</small>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary" onclick="sendMessage()">Send Message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.body.insertAdjacentHTML('beforeend', modalHTML);
+            }
+
+            // Set the report ID in the modal
+            document.getElementById('modalReportId').textContent = reportId;
+
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('contactSupportModal'));
+            modal.show();
+        }
+
+        // Send Message function
+        function sendMessage() {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('contactSupportModal'));
+            modal.hide();
+
+            // Show success message
+            const alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-success alert-dismissible fade show';
+            alertDiv.innerHTML = `
+                Message sent successfully! Our support team will get back to you soon.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+            document.querySelector('.container-fluid').insertAdjacentElement('afterbegin', alertDiv);
+
+            // Remove alert after 5 seconds
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+
+        // Keep the existing evidence upload functionality
         document.querySelectorAll('.upload-placeholder').forEach(placeholder => {
             placeholder.addEventListener('click', function() {
                 this.parentElement.querySelector('.evidence-input').click();
@@ -481,16 +752,6 @@
                         preview.appendChild(img);
                         preview.appendChild(removeBtn);
                         preview.querySelector('.upload-placeholder').style.display = 'none';
-
-                        // Add new upload placeholder if less than 5 images
-                        const container = document.getElementById('evidenceContainer');
-                        if (container.children.length < 5) {
-                            const newPreview = preview.cloneNode(true);
-                            newPreview.querySelector('img')?.remove();
-                            newPreview.querySelector('.evidence-remove')?.remove();
-                            newPreview.querySelector('.upload-placeholder').style.display = 'flex';
-                            container.appendChild(newPreview);
-                        }
                     };
                     reader.readAsDataURL(this.files[0]);
                 }

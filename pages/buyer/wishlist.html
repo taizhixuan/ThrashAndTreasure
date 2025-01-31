@@ -355,6 +355,40 @@
                 });
             }
         });
+
+        // Move to Cart functionality
+        document.querySelectorAll('.btn-primary').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const wishlistCard = this.closest('.col-xl-3');
+                
+                // Add removal animation
+                wishlistCard.style.transition = 'all 0.3s ease';
+                wishlistCard.style.opacity = '0';
+                wishlistCard.style.transform = 'translateY(-20px)';
+                
+                setTimeout(() => {
+                    // Remove the card
+                    wishlistCard.remove();
+                    
+                    // Show success toast
+                    const toast = new bootstrap.Toast(document.getElementById('moveToCartToast'));
+                    toast.show();
+                }, 300);
+            });
+        });
     </script>
+
+    <!-- Add this toast element before the closing </body> tag -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="moveToCartToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="bi bi-check-circle me-2"></i>
+                    Item successfully moved to cart!
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
 </body>
 </html> 
