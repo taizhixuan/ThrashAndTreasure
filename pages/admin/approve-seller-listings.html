@@ -181,6 +181,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-group">
+                                        <!-- The search field for listings -->
                                         <input type="text" class="form-control" placeholder="Search listings...">
                                         <button class="btn btn-outline-primary" type="button">
                                             <i class="bi bi-search"></i>
@@ -528,5 +529,28 @@
             }
         }
     </style>
+
+    <!-- Search Listings Functionality Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select the search input field inside the Pending Listings section by its placeholder text
+        const searchInput = document.querySelector('input[placeholder="Search listings..."]');
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                // Select all rows inside the listings table body
+                const rows = document.querySelectorAll('#listingsTableBody tr');
+                // Loop through each row and toggle its display based on the query match
+                rows.forEach(row => {
+                    if (row.textContent.toLowerCase().includes(query)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        }
+    });
+    </script>
 </body>
-</html> 
+</html>

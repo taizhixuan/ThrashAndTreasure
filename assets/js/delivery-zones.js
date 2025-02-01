@@ -125,11 +125,11 @@ class DeliveryZonesManager {
         }
 
         tbody.innerHTML = zones.map(zone => `
-            <tr>
+            <tr data-zone-id="${zone.zone_id}">
                 <td class="text-xs font-weight-bold">${zone.zone_id}</td>
-                <td class="text-xs font-weight-bold">${zone.zone_name}</td>
-                <td class="text-xs font-weight-bold">${zone.manager}</td>
-                <td class="text-center text-xs font-weight-bold">${zone.deliveries}</td>
+                <td class="text-xs font-weight-bold" data-zone-name>${zone.zone_name}</td>
+                <td class="text-xs font-weight-bold" data-manager>${zone.manager}</td>
+                <td class="text-center text-xs font-weight-bold" data-deliveries>${zone.deliveries}</td>
                 <td class="text-center">
                     <button class="btn btn-link text-dark px-3 mb-0" onclick="deliveryZonesManager.editZone('${zone.zone_id}')">
                         <i class="fas fa-pencil-alt text-dark me-2"></i>Edit
@@ -181,20 +181,58 @@ class DeliveryZonesManager {
         }
     }
 
-    handleUpdateZone() {
+    async handleUpdateZone() {
         const form = document.getElementById('editZoneForm');
         if (form && form.checkValidity()) {
-            if (this.modals.editZoneModal) {
+            try {
+                const zoneId = document.getElementById('editZoneId').value;
+                const formData = {
+                    zone_name: document.getElementById('editZoneName').value,
+                    manager: document.getElementById('editLogisticsManager').value,
+                    deliveries: parseInt(document.getElementById('editDeliveriesOnly').value) || 0
+                };
+
+                const response = await fetch(`/api/admin/delivery-zones/${zoneId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.message || 'Failed to update zone');
+                }
+
+                await this.loadDeliveryZones(); // Reload the zones
                 this.modals.editZoneModal.hide();
-                // Clean up after hiding
-                const backdrops = document.querySelectorAll('.modal-backdrop');
-                backdrops.forEach(backdrop => backdrop.remove());
-                document.body.classList.remove('modal-open');
                 form.reset();
+                alert('Zone updated successfully!');
+            } catch (error) {
+                console.error('Error updating zone:', error);
+                alert(error.message || 'Error updating zone');
             }
-        } else if (form) {
+        } else {
             form.reportValidity();
         }
+    }
+
+    editZone(zoneId) {
+        // Find the zone data from the table
+        const row = document.querySelector(`tr[data-zone-id="${zoneId}"]`);
+        if (!row) return;
+
+        // Populate the edit form
+        document.getElementById('editZoneId').value = zoneId;
+        document.getElementById('editZoneName').value = row.querySelector('[data-zone-name]').textContent;
+        document.getElementById('editLogisticsManager').value = row.querySelector('[data-manager]').textContent;
+        document.getElementById('editDeliveriesOnly').value = row.querySelector('[data-deliveries]').textContent;
+
+        // Show the modal
+        this.modals.editZoneModal.show();
     }
 
     async deleteZone(zoneId) {

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Notifications | Admin Dashboard</title>
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg">
-    <!-- Include Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <!-- Custom Admin CSS -->
-    <link rel="stylesheet" href="../../../assets/css/admin.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Notifications | Admin Dashboard</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../../assets/images/logo.svg" />
+  <!-- Include Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
+  <!-- Custom Admin CSS -->
+  <link rel="stylesheet" href="../../../assets/css/admin.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 <body class="g-sidenav-show bg-gray-100">
     <!-- Sidebar -->
@@ -103,620 +103,468 @@
         </div>
     </aside>
 
-    <!-- Main content -->
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps-4 pe-4">
-        <!-- Navbar -->
-        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl">
-            <div class="container-fluid py-1 px-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0">
-                        <li class="breadcrumb-item text-sm"><a href="admin-dashboard.html">Dashboard</a></li>
-                        <li class="breadcrumb-item text-sm active" aria-current="page">Manage Notifications</li>
-                    </ol>
-                </nav>
-                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                        <div class="input-group input-group-outline">
-                            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" placeholder="Search notifications...">
-                        </div>
-                    </div>
-                    <ul class="navbar-nav justify-content-end">
-                        <!-- Notifications -->
-                        <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-bell-fill cursor-pointer"></i>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    <span class="visually-hidden">unread notifications</span>
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                                <li class="mb-2">
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <div class="d-flex py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="text-sm font-weight-normal mb-1">New user registration</h6>
-                                                <p class="text-xs text-secondary mb-0">2 mins ago</p>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <button class="btn btn-link text-secondary mb-0 edit-notification">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="mb-2">
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <div class="d-flex py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="text-sm font-weight-normal mb-1">New listing reported</h6>
-                                                <p class="text-xs text-secondary mb-0">1 hour ago</p>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <button class="btn btn-link text-secondary mb-0 edit-notification">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="mb-2">
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <div class="d-flex py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="text-sm font-weight-normal mb-1">System maintenance scheduled</h6>
-                                                <p class="text-xs text-secondary mb-0">3 hours ago</p>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <button class="btn btn-link text-secondary mb-0 edit-notification">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <div class="d-flex py-1">
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="text-sm font-weight-normal mb-1">Weekly report available</h6>
-                                                <p class="text-xs text-secondary mb-0">Yesterday</p>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <button class="btn btn-link text-secondary mb-0 edit-notification">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+  <!-- Main content -->
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps-4 pe-4">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0">
+            <li class="breadcrumb-item text-sm"><a href="admin-dashboard.html">Dashboard</a></li>
+            <li class="breadcrumb-item text-sm active" aria-current="page">Manage Notifications</li>
+          </ol>
         </nav>
-
-        <div class="container-fluid py-4">
-            <!-- Statistics Cards -->
-            <div class="row">
-                <!-- Reuse the existing statistics cards from your current code -->
-                <!-- Pending Notifications -->
-                <div class="col-xl-3 col-sm-6 mb-4">
-                    <div class="card">
-                        <div class="card-body p-3">
-                            <div class="row">
-                                <div class="col-8">
-                                    <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Pending</p>
-                                        <h5 class="font-weight-bolder mb-0">
-                                            5
-                                            <span class="text-warning text-sm font-weight-bolder">Scheduled</span>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <div class="icon icon-shape bg-gradient-warning shadow text-center border-radius-md">
-                                        <i class="bi bi-clock text-lg opacity-10"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group input-group-outline">
+              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+              <input type="text" class="form-control" placeholder="Search notifications..." />
+            </div>
+          </div>
+          <ul class="navbar-nav justify-content-end">
+            <!-- Notifications dropdown -->
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-bell-fill cursor-pointer"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  <span class="visually-hidden">unread notifications</span>
+                </span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">New user registration</h6>
+                        <p class="text-xs text-secondary mb-0">2 mins ago</p>
+                      </div>
+                      <div class="ms-auto">
+                        <button class="btn btn-link text-secondary mb-0 edit-notification">
+                          <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                      </div>
                     </div>
-                </div>
-                <!-- Continue with other statistics cards... -->
-            </div>
-
-            <!-- Notifications Table -->
-            <div class="row mt-4">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header pb-0">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h6>Recent Notifications</h6>
-                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createNotificationModal">
-                                    <i class="bi bi-plus-lg me-2"></i>Create New
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body px-0 pt-0 pb-2">
-                            <div class="table-responsive p-0">
-                                <table class="table align-items-center mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Recipients</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Created</th>
-                                            <th class="text-secondary opacity-7"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">System Maintenance</h6>
-                                                        <p class="text-xs text-secondary mb-0">Scheduled maintenance for system updates</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-sm bg-gradient-info">System</span>
-                                                <p class="text-xs text-secondary mb-0">Technical Update</p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">All Users</span>
-                                                <p class="text-xs text-secondary mb-0">Platform-wide</p>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-sm bg-gradient-success">Sent</span>
-                                                <p class="text-xs text-secondary mb-0">Delivered: 2.5k</p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">2 hours ago</span>
-                                                <p class="text-xs text-secondary mb-0">10:30 AM</p>
-                                            </td>
-                                            <td class="align-middle">
-                                                <button class="btn btn-link text-secondary mb-0" onclick="openEditModal(1)">
-                                                    <i class="bi bi-three-dots-vertical"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">New Feature Release</h6>
-                                                        <p class="text-xs text-secondary mb-0">Enhanced search functionality</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-sm bg-gradient-primary">Announcement</span>
-                                                <p class="text-xs text-secondary mb-0">Feature Update</p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">All Users</span>
-                                                <p class="text-xs text-secondary mb-0">Active Users: 5k+</p>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-sm bg-gradient-warning">Scheduled</span>
-                                                <p class="text-xs text-secondary mb-0">Tomorrow, 9 AM</p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">1 day ago</span>
-                                                <p class="text-xs text-secondary mb-0">Created by Admin</p>
-                                            </td>
-                                            <td class="align-middle">
-                                                <button class="btn btn-link text-secondary mb-0" onclick="openEditModal(2)">
-                                                    <i class="bi bi-three-dots-vertical"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">Holiday Promotion</h6>
-                                                        <p class="text-xs text-secondary mb-0">Special discounts for sellers</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-sm bg-gradient-success">Marketing</span>
-                                                <p class="text-xs text-secondary mb-0">Promotional</p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">Sellers Only</span>
-                                                <p class="text-xs text-secondary mb-0">Target: 1.2k sellers</p>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-sm bg-gradient-danger">Failed</span>
-                                                <p class="text-xs text-secondary mb-0">Error: API timeout</p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">3 days ago</span>
-                                                <p class="text-xs text-secondary mb-0">Retry available</p>
-                                            </td>
-                                            <td class="align-middle">
-                                                <button class="btn btn-link text-secondary mb-0" onclick="openEditModal(3)">
-                                                    <i class="bi bi-three-dots-vertical"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">Security Update</h6>
-                                                        <p class="text-xs text-secondary mb-0">Important security patches</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-sm bg-gradient-danger">Alert</span>
-                                                <p class="text-xs text-secondary mb-0">High Priority</p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">All Users</span>
-                                                <p class="text-xs text-secondary mb-0">Critical Update</p>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-sm bg-gradient-success">Sent</span>
-                                                <p class="text-xs text-secondary mb-0">Read: 3.2k</p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold">4 days ago</span>
-                                                <p class="text-xs text-secondary mb-0">Auto-generated</p>
-                                            </td>
-                                            <td class="align-middle">
-                                                <button class="btn btn-link text-secondary mb-0" onclick="openEditModal(4)">
-                                                    <i class="bi bi-three-dots-vertical"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">Buyer Protection Update</h6>
-                                                        <p class="text-xs text-secondary mb-0">Policy changes for buyers</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                        <span class="badge badge-sm bg-gradient-info">Policy</span>
-                                                        <p class="text-xs text-secondary mb-0">Terms Update</p>
-                                                    </td>
-                                                    <td>
-                                                        <span class="text-xs font-weight-bold">Buyers Only</span>
-                                                        <p class="text-xs text-secondary mb-0">Active buyers: 3.5k</p>
-                                                    </td>
-                                                    <td>
-                                                        <span class="badge badge-sm bg-gradient-secondary">Draft</span>
-                                                        <p class="text-xs text-secondary mb-0">Pending review</p>
-                                                    </td>
-                                                    <td>
-                                                        <span class="text-xs font-weight-bold">5 days ago</span>
-                                                        <p class="text-xs text-secondary mb-0">Last edited: Today</p>
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <button class="btn btn-link text-secondary mb-0" onclick="openEditModal(5)">
-                                                            <i class="bi bi-three-dots-vertical"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                  </a>
+                </li>
+                <!-- More dropdown items ... -->
+              </ul>
+            </li>
+          </ul>
         </div>
-    </main>
+      </div>
+    </nav>
 
-    <!-- Create Notification Modal -->
-    <div class="modal fade" id="createNotificationModal" tabindex="-1" aria-labelledby="createNotificationModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createNotificationModalLabel">Create New Notification</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="notificationTitle" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="notificationTitle" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="notificationMessage" class="form-label">Message</label>
-                            <textarea class="form-control" id="notificationMessage" rows="3" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="notificationType" class="form-label">Type</label>
-                            <select class="form-select" id="notificationType" required>
-                                <option value="system">System</option>
-                                <option value="announcement">Announcement</option>
-                                <option value="alert">Alert</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="notificationRecipients" class="form-label">Recipients</label>
-                            <select class="form-select" id="notificationRecipients" required>
-                                <option value="all">All Users</option>
-                                <option value="buyers">Buyers Only</option>
-                                <option value="sellers">Sellers Only</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="scheduledTime" class="form-label">Schedule (Optional)</label>
-                            <input type="datetime-local" class="form-control" id="scheduledTime">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="createNotification()">Create</button>
-                </div>
+    <div class="container-fluid py-4">
+      <!-- Statistics Cards (omitted for brevity) -->
+      <!-- Notifications Table -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header pb-0">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6>Recent Notifications</h6>
+                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createNotificationModal">
+                  <i class="bi bi-plus-lg me-2"></i>Create New
+                </button>
+              </div>
             </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Title</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Type</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Recipients</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Created</th>
+                      <th class="text-secondary opacity-7"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="notificationsTbody">
+                    <!-- Rows will be rendered dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </main>
 
-    <!-- Edit Notification Modal -->
-    <div class="modal fade" id="editNotificationModal" tabindex="-1" aria-labelledby="editNotificationModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editNotificationModalLabel">Edit Notification</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="editNotificationTitle" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="editNotificationTitle" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editNotificationMessage" class="form-label">Message</label>
-                            <textarea class="form-control" id="editNotificationMessage" rows="3" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editNotificationType" class="form-label">Type</label>
-                            <select class="form-select" id="editNotificationType" required>
-                                <option value="system">System</option>
-                                <option value="announcement">Announcement</option>
-                                <option value="alert">Alert</option>
-                                <option value="marketing">Marketing</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editNotificationStatus" class="form-label">Status</label>
-                            <select class="form-select" id="editNotificationStatus" required>
-                                <option value="sent">Sent</option>
-                                <option value="scheduled">Scheduled</option>
-                                <option value="failed">Failed</option>
-                                <option value="draft">Draft</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editScheduledTime" class="form-label">Schedule (Optional)</label>
-                            <input type="datetime-local" class="form-control" id="editScheduledTime">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger me-auto" onclick="deleteNotification()">Delete</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" onclick="updateNotification()">Save Changes</button>
-                </div>
-            </div>
+  <!-- Create Notification Modal -->
+  <div class="modal fade" id="createNotificationModal" tabindex="-1" aria-labelledby="createNotificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createNotificationModalLabel">Create New Notification</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <form id="createNotificationForm">
+            <div class="mb-3">
+              <label for="notificationTitle" class="form-label">Title</label>
+              <input type="text" class="form-control" id="notificationTitle" required />
+            </div>
+            <div class="mb-3">
+              <label for="notificationMessage" class="form-label">Message</label>
+              <textarea class="form-control" id="notificationMessage" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="notificationType" class="form-label">Type</label>
+              <select class="form-select" id="notificationType" required>
+                <option value="system">System</option>
+                <option value="announcement">Announcement</option>
+                <option value="alert">Alert</option>
+                <option value="marketing">Marketing</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="notificationRecipients" class="form-label">Recipients</label>
+              <select class="form-select" id="notificationRecipients" required>
+                <option value="all">All Users</option>
+                <option value="buyers">Buyers Only</option>
+                <option value="sellers">Sellers Only</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="scheduledTime" class="form-label">Schedule (Optional)</label>
+              <input type="datetime-local" class="form-control" id="scheduledTime" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="createNotification()">Create</button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Bootstrap JS and other scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Store notifications data globally
-        const notificationsData = {
-            1: { 
-                title: 'System Maintenance', 
-                message: 'System will be down for maintenance...', 
-                type: 'system', 
-                status: 'sent',
-                recipients: 'all',
-                scheduledTime: ''
-            },
-            2: { 
-                title: 'New Feature Release', 
-                message: 'We are excited to announce...', 
-                type: 'announcement', 
-                status: 'scheduled',
-                recipients: 'all',
-                scheduledTime: '2024-03-25T10:00'
-            },
-            3: { 
-                title: 'Holiday Promotion', 
-                message: 'Special holiday discounts...', 
-                type: 'marketing', 
-                status: 'failed',
-                recipients: 'sellers',
-                scheduledTime: ''
-            },
-            4: { 
-                title: 'Security Update', 
-                message: 'Important security patches have been applied...', 
-                type: 'alert', 
-                status: 'sent',
-                recipients: 'all',
-                scheduledTime: ''
-            },
-            5: { 
-                title: 'Buyer Protection Update', 
-                message: 'We have updated our buyer protection policies...', 
-                type: 'policy', 
-                status: 'draft',
-                recipients: 'buyers',
-                scheduledTime: ''
-            }
-        };
+  <!-- Edit Notification Modal -->
+  <div class="modal fade" id="editNotificationModal" tabindex="-1" aria-labelledby="editNotificationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editNotificationModalLabel">Edit Notification</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editNotificationForm">
+            <div class="mb-3">
+              <label for="editNotificationTitle" class="form-label">Title</label>
+              <input type="text" class="form-control" id="editNotificationTitle" required />
+            </div>
+            <div class="mb-3">
+              <label for="editNotificationMessage" class="form-label">Message</label>
+              <textarea class="form-control" id="editNotificationMessage" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="editNotificationType" class="form-label">Type</label>
+              <select class="form-select" id="editNotificationType" required>
+                <option value="system">System</option>
+                <option value="announcement">Announcement</option>
+                <option value="alert">Alert</option>
+                <option value="marketing">Marketing</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="editNotificationStatus" class="form-label">Status</label>
+              <select class="form-select" id="editNotificationStatus" required>
+                <option value="sent">Sent</option>
+                <option value="scheduled">Scheduled</option>
+                <option value="failed">Failed</option>
+                <option value="draft">Draft</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="editScheduledTime" class="form-label">Schedule (Optional)</label>
+              <input type="datetime-local" class="form-control" id="editScheduledTime" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger me-auto" onclick="deleteNotification()">Delete</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" onclick="updateNotification()">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        let currentNotificationId = null;
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- JavaScript for Create, Edit, Delete Notification Functionality -->
+  <script>
+    // In-memory data store for notifications.
+    // Pre-populated with sample data.
+    const notificationsData = {
+      1: { 
+        title: 'System Maintenance', 
+        message: 'Scheduled maintenance for system updates', 
+        type: 'system', 
+        status: 'sent',
+        recipients: 'All Users',
+        scheduledTime: '',
+        created: '2 hours ago'
+      },
+      2: { 
+        title: 'New Feature Release', 
+        message: 'Enhanced search functionality', 
+        type: 'announcement', 
+        status: 'scheduled',
+        recipients: 'All Users',
+        scheduledTime: '2024-03-25T10:00',
+        created: '1 day ago'
+      },
+      3: { 
+        title: 'Holiday Promotion', 
+        message: 'Special discounts for sellers', 
+        type: 'marketing', 
+        status: 'failed',
+        recipients: 'Sellers Only',
+        scheduledTime: '',
+        created: '3 days ago'
+      },
+      4: { 
+        title: 'Security Update', 
+        message: 'Important security patches have been applied', 
+        type: 'alert', 
+        status: 'sent',
+        recipients: 'All Users',
+        scheduledTime: '',
+        created: '4 days ago'
+      },
+      5: { 
+        title: 'Buyer Protection Update', 
+        message: 'Policy changes for buyers', 
+        type: 'policy', 
+        status: 'draft',
+        recipients: 'Buyers Only',
+        scheduledTime: '',
+        created: '5 days ago'
+      }
+    };
 
-        function createNotification() {
-            const title = document.getElementById('notificationTitle').value;
-            const message = document.getElementById('notificationMessage').value;
-            const type = document.getElementById('notificationType').value;
-            const recipients = document.getElementById('notificationRecipients').value;
-            
-            if (!title || !message || !type || !recipients) {
-                alert('Please fill in all required fields');
-                return;
-            }
+    // Next notification ID (incremental)
+    let nextNotificationId = 6;
+    // Current notification ID for editing
+    let currentNotificationId = null;
 
-            alert('Notification created successfully!');
-            bootstrap.Modal.getInstance(document.getElementById('createNotificationModal')).hide();
-            
-            // Reset form
-            document.getElementById('createNotificationModal').querySelector('form').reset();
-        }
+    // Render the notifications table from notificationsData.
+    function renderNotificationsTable() {
+      const tbody = document.getElementById('notificationsTbody');
+      tbody.innerHTML = ''; // Clear existing rows
 
-        function openEditModal(notificationId) {
-            currentNotificationId = notificationId;
-            const notification = notificationsData[notificationId];
-            
-            if (!notification) {
-                console.error('Notification not found:', notificationId);
-                return;
-            }
+      for (const id in notificationsData) {
+        const notif = notificationsData[id];
+        // Determine badge classes based on type and status.
+        let typeBadgeClass = (notif.type === 'system') ? 'bg-gradient-info' :
+                             (notif.type === 'announcement') ? 'bg-gradient-primary' :
+                             (notif.type === 'alert') ? 'bg-gradient-danger' : 'bg-gradient-secondary';
+        let statusBadgeClass = (notif.status === 'sent') ? 'bg-gradient-success' :
+                               (notif.status === 'scheduled') ? 'bg-gradient-warning' :
+                               (notif.status === 'failed') ? 'bg-gradient-danger' : 'bg-gradient-secondary';
+        // Create a table row.
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>
+            <div class="d-flex px-2 py-1">
+              <div class="d-flex flex-column justify-content-center">
+                <h6 class="mb-0 text-sm">${notif.title}</h6>
+                <p class="text-xs text-secondary mb-0">${notif.message}</p>
+              </div>
+            </div>
+          </td>
+          <td>
+            <span class="badge badge-sm ${typeBadgeClass}">${notif.type.charAt(0).toUpperCase() + notif.type.slice(1)}</span>
+            <p class="text-xs text-secondary mb-0">Type Info</p>
+          </td>
+          <td>
+            <span class="text-xs font-weight-bold">${notif.recipients}</span>
+            <p class="text-xs text-secondary mb-0">Details</p>
+          </td>
+          <td>
+            <span class="badge badge-sm ${statusBadgeClass}">${notif.status.charAt(0).toUpperCase() + notif.status.slice(1)}</span>
+            <p class="text-xs text-secondary mb-0">Status Info</p>
+          </td>
+          <td>
+            <span class="text-xs font-weight-bold">${notif.created || 'Just now'}</span>
+            <p class="text-xs text-secondary mb-0">${notif.scheduledTime ? 'Scheduled' : 'Immediate'}</p>
+          </td>
+          <td class="align-middle">
+            <button class="btn btn-link text-secondary mb-0" onclick="openEditModal(${id})">
+              <i class="bi bi-three-dots-vertical"></i>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      }
+    }
 
-            // Populate the edit modal with the notification data
-            document.getElementById('editNotificationTitle').value = notification.title;
-            document.getElementById('editNotificationMessage').value = notification.message;
-            document.getElementById('editNotificationType').value = notification.type;
-            document.getElementById('editNotificationStatus').value = notification.status;
-            
-            // Set scheduled time if exists
-            const scheduledTimeInput = document.getElementById('editScheduledTime');
-            scheduledTimeInput.value = notification.scheduledTime || '';
+    // Call renderNotificationsTable when the page loads.
+    document.addEventListener('DOMContentLoaded', renderNotificationsTable);
 
-            // Show the modal
-            const editModal = new bootstrap.Modal(document.getElementById('editNotificationModal'));
-            editModal.show();
-        }
+    // Create a new notification
+    function createNotification() {
+      const title = document.getElementById('notificationTitle').value.trim();
+      const message = document.getElementById('notificationMessage').value.trim();
+      const type = document.getElementById('notificationType').value;
+      const recipients = document.getElementById('notificationRecipients').value;
+      const scheduledTime = document.getElementById('scheduledTime').value;
 
-        function updateNotification() {
-            if (!currentNotificationId) {
-                console.error('No notification selected for update');
-                return;
-            }
+      if (!title || !message || !type || !recipients) {
+        alert('Please fill in all required fields');
+        return;
+      }
 
-            const title = document.getElementById('editNotificationTitle').value;
-            const message = document.getElementById('editNotificationMessage').value;
-            const type = document.getElementById('editNotificationType').value;
-            const status = document.getElementById('editNotificationStatus').value;
-            
-            if (!title || !message || !type || !status) {
-                alert('Please fill in all required fields');
-                return;
-            }
+      // Create new notification object.
+      const newNotif = {
+        title,
+        message,
+        type,
+        status: scheduledTime ? 'scheduled' : 'sent', // for example
+        recipients,
+        scheduledTime,
+        created: 'Just now'
+      };
 
-            // Update the notification in our data store
-            notificationsData[currentNotificationId] = {
-                ...notificationsData[currentNotificationId],
-                title,
-                message,
-                type,
-                status,
-                scheduledTime: document.getElementById('editScheduledTime').value
-            };
+      // Add to the data store.
+      notificationsData[nextNotificationId] = newNotif;
+      nextNotificationId++;
 
-            alert('Notification updated successfully!');
-            bootstrap.Modal.getInstance(document.getElementById('editNotificationModal')).hide();
-        }
+      alert('Notification created successfully!');
+      // Close the modal.
+      bootstrap.Modal.getInstance(document.getElementById('createNotificationModal')).hide();
+      // Re-render the table.
+      renderNotificationsTable();
+    }
 
-        function deleteNotification() {
-            if (!currentNotificationId) {
-                console.error('No notification selected for deletion');
-                return;
-            }
+    // Open the edit modal and prefill form data for a notification.
+    function openEditModal(notificationId) {
+      currentNotificationId = notificationId;
+      const notification = notificationsData[notificationId];
+      if (!notification) {
+        console.error('Notification not found:', notificationId);
+        return;
+      }
+      // Populate the edit modal form fields.
+      document.getElementById('editNotificationTitle').value = notification.title;
+      document.getElementById('editNotificationMessage').value = notification.message;
+      document.getElementById('editNotificationType').value = notification.type;
+      document.getElementById('editNotificationStatus').value = notification.status;
+      document.getElementById('editScheduledTime').value = notification.scheduledTime || '';
+      // Show the modal.
+      const editModal = new bootstrap.Modal(document.getElementById('editNotificationModal'));
+      editModal.show();
+    }
 
-            if (confirm('Are you sure you want to delete this notification?')) {
-                // Delete the notification from our data store
-                delete notificationsData[currentNotificationId];
-                
-                alert('Notification deleted successfully!');
-                bootstrap.Modal.getInstance(document.getElementById('editNotificationModal')).hide();
-                
-                // In a real application, you would refresh the table here
-            }
-        }
+    // Update an existing notification.
+    function updateNotification() {
+      if (!currentNotificationId) {
+        console.error('No notification selected for update');
+        return;
+      }
+      const title = document.getElementById('editNotificationTitle').value.trim();
+      const message = document.getElementById('editNotificationMessage').value.trim();
+      const type = document.getElementById('editNotificationType').value;
+      const status = document.getElementById('editNotificationStatus').value;
+      const scheduledTime = document.getElementById('editScheduledTime').value;
 
-        // Add event listeners when the document is ready
-        document.addEventListener('DOMContentLoaded', function() {
-            // Reset forms when modals are closed
-            ['createNotificationModal', 'editNotificationModal'].forEach(modalId => {
-                const modal = document.getElementById(modalId);
-                modal.addEventListener('hidden.bs.modal', function() {
-                    modal.querySelector('form').reset();
-                    if (modalId === 'editNotificationModal') {
-                        currentNotificationId = null;
-                    }
-                });
-            });
+      if (!title || !message || !type || !status) {
+        alert('Please fill in all required fields');
+        return;
+      }
+
+      // Update the notification in the data store.
+      notificationsData[currentNotificationId] = {
+        ...notificationsData[currentNotificationId],
+        title,
+        message,
+        type,
+        status,
+        scheduledTime
+      };
+
+      alert('Notification updated successfully!');
+      bootstrap.Modal.getInstance(document.getElementById('editNotificationModal')).hide();
+      renderNotificationsTable();
+    }
+
+    // Delete the currently edited notification.
+    function deleteNotification() {
+      if (!currentNotificationId) {
+        console.error('No notification selected for deletion');
+        return;
+      }
+
+      if (confirm('Are you sure you want to delete this notification?')) {
+        delete notificationsData[currentNotificationId];
+        alert('Notification deleted successfully!');
+        bootstrap.Modal.getInstance(document.getElementById('editNotificationModal')).hide();
+        renderNotificationsTable();
+      }
+    }
+
+    // Reset forms when modals are closed.
+    document.addEventListener('DOMContentLoaded', function() {
+      ['createNotificationModal', 'editNotificationModal'].forEach(modalId => {
+        const modalEl = document.getElementById(modalId);
+        modalEl.addEventListener('hidden.bs.modal', function() {
+          const form = modalEl.querySelector('form');
+          if (form) form.reset();
+          if (modalId === 'editNotificationModal') {
+            currentNotificationId = null;
+          }
         });
-    </script>
-
-    <!-- Add notification dropdown fix styles -->
-    <style>
-        /* Fix notification dropdown positioning */
-        .notification-wrapper .dropdown-menu {
-            position: absolute !important;
-            top: 100% !important;
-            right: 0 !important;
-            left: auto !important;
-            width: 320px;
-            margin-top: 0.5rem !important;
-            transform: none !important;
-            z-index: 9999 !important;
-            box-shadow: 0 8px 26px -4px rgba(20, 20, 20, 0.15);
-        }
-
-        /* Ensure search bar doesn't get overlapped */
-        .input-group-outline {
-            margin-right: 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Ensure navbar stays above table but below dropdown */
-        .navbar-main {
-            position: relative;
-            z-index: 1000;
-        }
-
-        /* Fix notification badge positioning */
-        .notification-wrapper .badge {
-            transform: translate(50%, -50%) !important;
-            z-index: 2;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 992px) {
-            .notification-wrapper .dropdown-menu {
-                position: fixed !important;
-                top: 60px !important;
-                right: 1rem !important;
-                left: auto !important;
-                width: calc(100% - 2rem);
-                max-width: 320px;
-                margin: 0.5rem 0 !important;
-            }
-        }
-    </style>
+      });
+    });
+  </script>
+  
+  <!-- Additional styles for notification dropdown fix (unchanged) -->
+  <style>
+    /* Fix notification dropdown positioning */
+    .notification-wrapper .dropdown-menu {
+      position: absolute !important;
+      top: 100% !important;
+      right: 0 !important;
+      left: auto !important;
+      width: 320px;
+      margin-top: 0.5rem !important;
+      transform: none !important;
+      z-index: 9999 !important;
+      box-shadow: 0 8px 26px -4px rgba(20, 20, 20, 0.15);
+    }
+    /* Ensure search bar doesn't get overlapped */
+    .input-group-outline {
+      margin-right: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    /* Ensure navbar stays above table but below dropdown */
+    .navbar-main {
+      position: relative;
+      z-index: 1000;
+    }
+    /* Fix notification badge positioning */
+    .notification-wrapper .badge {
+      transform: translate(50%, -50%) !important;
+      z-index: 2;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .notification-wrapper .dropdown-menu {
+        position: fixed !important;
+        top: 60px !important;
+        right: 1rem !important;
+        left: auto !important;
+        width: calc(100% - 2rem);
+        max-width: 320px;
+        margin: 0.5rem 0 !important;
+      }
+    }
+  </style>
 </body>
-</html> 
+</html>

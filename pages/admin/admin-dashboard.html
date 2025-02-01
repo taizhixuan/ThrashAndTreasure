@@ -385,7 +385,7 @@
         });
     </script>
 
-    <!-- Add this script before the closing body tag -->
+    <!-- Sidebar Toggle Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Sidebar toggle functionality
@@ -417,7 +417,7 @@
         });
     </script>
 
-    <!-- Add before closing body tag -->
+    <!-- Additional Admin Script -->
     <script src="../../../assets/js/admin.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -426,5 +426,114 @@
             console.log('AdminDashboard initialized');
         });
     </script>
+
+    <!-- Search Bar Functionality Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.querySelector('.navbar-search-input');
+            const searchButton = document.querySelector('.search-button');
+            const searchDropdown = document.querySelector('.search-dropdown');
+            const defaultState = document.getElementById('defaultState');
+            const searchLoading = document.getElementById('searchLoading');
+            const noResults = document.getElementById('noResults');
+            const searchError = document.getElementById('searchError');
+            const resultsContainer = document.querySelector('.search-results-container');
+
+            // Dummy data for search (simulating available pages/items)
+            const searchData = [
+                { title: 'Dashboard', url: 'admin-dashboard.html' },
+                { title: 'Manage Users', url: 'manage-users.html' },
+                { title: 'Approve Listings', url: 'approve-seller-listings.html' },
+                { title: 'Performance', url: 'monitor-performance.html' },
+                { title: 'Resolve Disputes', url: 'resolve-disputes.html' },
+                { title: 'Notifications', url: 'manage-notifications.html' },
+                { title: 'Reports', url: 'generate-reports.html' },
+                { title: 'Delivery Zones', url: 'manage-delivery-zones.html' },
+                { title: 'Messages', url: 'admin-messages.html' }
+            ];
+
+            let searchTimeout;
+
+            // Function to clear all states
+            function resetStates() {
+                defaultState.classList.remove('d-none');
+                searchLoading.classList.add('d-none');
+                noResults.classList.add('d-none');
+                searchError.classList.add('d-none');
+                resultsContainer.innerHTML = '';
+            }
+
+            // Function to perform search on dummy data
+            function performSearch(query) {
+                // Filter searchData by query (case-insensitive)
+                return searchData.filter(item => item.title.toLowerCase().includes(query.toLowerCase()));
+            }
+
+            // Function to display results
+            function displayResults(results) {
+                resultsContainer.innerHTML = '';
+                results.forEach(result => {
+                    const a = document.createElement('a');
+                    a.href = result.url;
+                    a.className = 'dropdown-item';
+                    a.textContent = result.title;
+                    resultsContainer.appendChild(a);
+                });
+            }
+
+            // Function to handle search
+            function handleSearch() {
+                const query = searchInput.value.trim();
+
+                // If query is empty, show default state and hide other messages
+                if (query === '') {
+                    resetStates();
+                    return;
+                }
+
+                // Show loading state and hide default state
+                defaultState.classList.add('d-none');
+                noResults.classList.add('d-none');
+                searchError.classList.add('d-none');
+                resultsContainer.innerHTML = '';
+                searchLoading.classList.remove('d-none');
+
+                // Simulate search delay (e.g., fetching from a server)
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    try {
+                        const results = performSearch(query);
+                        searchLoading.classList.add('d-none');
+
+                        if (results.length > 0) {
+                            displayResults(results);
+                        } else {
+                            noResults.classList.remove('d-none');
+                        }
+                    } catch (error) {
+                        searchLoading.classList.add('d-none');
+                        searchError.classList.remove('d-none');
+                        console.error('Search error:', error);
+                    }
+                }, 500); // 500ms delay to simulate loading
+            }
+
+            // Listen to input events
+            searchInput.addEventListener('input', handleSearch);
+
+            // Also trigger search on search button click
+            searchButton.addEventListener('click', handleSearch);
+
+            // Optionally, hide the dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.navbar-search')) {
+                    searchDropdown.classList.remove('show');
+                } else {
+                    // Show the dropdown when clicking inside the search area
+                    searchDropdown.classList.add('show');
+                }
+            });
+        });
+    </script>
 </body>
-</html> 
+</html>
