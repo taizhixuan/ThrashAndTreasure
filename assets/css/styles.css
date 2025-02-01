@@ -680,4 +680,79 @@ section {
 
 .pagination .page-item:last-child .page-link:hover i {
     transform: translateX(3px);
+}
+
+/* Timeline styling */
+.timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: var(--primary-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.timeline-point {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.timeline .col-md-6.text-end .timeline-point {
+    right: -10px;
+}
+
+.timeline .col-md-6:not(.text-end) .timeline-point {
+    left: -10px;
+}
+
+.timeline .card {
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: transform 0.3s ease;
+}
+
+.timeline .card:hover {
+    transform: translateY(-5px);
+}
+
+/* Team section styling */
+.team-member .social-links a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.team-member .social-links a:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Core values hover effect */
+.core-values .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.core-values .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.core-values .card:hover i {
+    animation: bounce 0.5s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 } 
