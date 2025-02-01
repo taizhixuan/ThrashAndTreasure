@@ -254,7 +254,7 @@
                                 <div class="chat-input">
                                     <form id="messageForm" class="mb-0">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="messageInput" placeholder="Type your message...">
+                                            <input type="text" class="form-control" placeholder="  Type your message...">
                                             <button class="btn btn-primary" type="submit">
                                                 <i class="bi bi-send"></i>
                                             </button>
@@ -309,52 +309,116 @@
 
     <script>
         $(document).ready(function() {
-            // Handle message form submission
-            $('#messageForm').on('submit', function(e) {
-                e.preventDefault();
-                
-                const messageInput = $('#messageInput');
-                const message = messageInput.val().trim();
-                
-                if (message) {
-                    // Add message to chat
-                    $('#chatMessages').append(`
-                        <div class="message-bubble message-sent">
-                            <div class="message-text">${message}</div>
-                            <div class="message-time">${new Date().toLocaleTimeString()}</div>
-                        </div>
-                    `);
-                    
-                    // Clear input
-                    messageInput.val('');
-                    
-                    // Scroll to bottom
-                    const chatMessages = $('#chatMessages');
-                    chatMessages.scrollTop(chatMessages[0].scrollHeight);
-                }
-            });
+            loadMessages();
+            setupMessageHandlers();
+        });
 
+        function loadMessages() {
+            // Sample message data
+            const messages = [
+                {
+                    id: 1,
+                    name: 'John Smith',
+                    role: 'Courier',
+                    avatar: '../../../assets/images/Sarah.jpg',
+                    lastMessage: 'Package delivered successfully',
+                    time: '10:30 AM',
+                    unread: true
+                }
+                // Alice Brown conversation removed
+            ];
+
+            const messageList = $('.message-list');
+            messages.forEach(msg => {
+                messageList.append(`
+                    <div class="contact-list-item p-3 border-bottom" data-contact-id="${msg.id}">
+                        <div class="d-flex align-items-center">
+                            <img src="${msg.avatar}" class="avatar avatar-sm rounded-circle me-3" style="width: 40px; height: 40px; object-fit: cover;">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0">${msg.name}</h6>
+                                <p class="text-sm text-secondary mb-0">${msg.role}</p>
+                                <p class="text-sm mb-0 ${msg.unread ? 'text-primary fw-bold' : 'text-secondary'}">${msg.lastMessage}</p>
+                            </div>
+                            <div class="text-end">
+                                <small class="text-secondary">${msg.time}</small>
+                                ${msg.unread ? '<span class="badge bg-primary rounded-pill ms-2">New</span>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                `);
+            });
+        }
+
+        function setupMessageHandlers() {
             // Handle contact selection
             $('.contact-list-item').click(function() {
                 $('.contact-list-item').removeClass('active');
                 $(this).addClass('active');
-                
-                // Clear previous messages
-                $('#chatMessages').empty();
-                
-                // Add sample messages
-                $('#chatMessages').append(`
-                    <div class="message-bubble message-received">
-                        <div class="message-text">Hello, I have a question about my delivery</div>
-                        <div class="message-time">10:15 AM</div>
-                    </div>
-                    <div class="message-bubble message-sent">
-                        <div class="message-text">Of course! How can I help you?</div>
-                        <div class="message-time">10:16 AM</div>
+                loadChat($(this).data('contact-id'));
+            });
+
+            // Handle message submission
+            $('#messageForm').submit(function(e) {
+                e.preventDefault();
+                const input = $(this).find('input');
+                const message = input.val().trim();
+                if (message) {
+                    sendMessage(message);
+                    input.val('');
+                }
+            });
+        }
+
+        function loadChat(contactId) {
+            // Sample chat data
+            const chat = {
+                messages: [
+                    {
+                        sent: false,
+                        text: 'Hello, I have a question about my delivery',
+                        time: '10:15 AM'
+                    },
+                    {
+                        sent: true,
+                        text: 'Of course! How can I help you?',
+                        time: '10:16 AM'
+                    }
+                    // Add more messages
+                ]
+            };
+
+            const chatMessages = $('#chatMessages');
+            chatMessages.empty();
+            
+            chat.messages.forEach(msg => {
+                chatMessages.append(`
+                    <div class="message-bubble ${msg.sent ? 'message-sent' : 'message-received'}">
+                        <div class="message-text">${msg.text}</div>
+                        <div class="message-time">${msg.time}</div>
                     </div>
                 `);
             });
-        });
+
+            chatMessages.scrollTop(chatMessages[0].scrollHeight);
+        }
+
+        function sendMessage(text) {
+            const chatMessages = $('#chatMessages');
+            chatMessages.append(`
+                <div class="message-bubble message-sent">
+                    <div class="message-text">${text}</div>
+                    <div class="message-time">${new Date().toLocaleTimeString()}</div>
+                </div>
+            `);
+            chatMessages.scrollTop(chatMessages[0].scrollHeight);
+        }
+
+        function sendNewMessage() {
+            // Implement new message sending logic
+            $('#newMessageModal').modal('hide');
+            // Show success notification
+            alert('Message sent successfully');
+        }
     </script>
 
     <!-- Add this after the body tag -->
